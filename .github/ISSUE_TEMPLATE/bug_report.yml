@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report an issue in the app
+description: Report an issue in Whisper
 labels: [bug]
 body:
 
@@ -41,7 +41,7 @@ body:
     attributes:
       label: Whisper version
       description: |
-        You can find your URLCheck version in **About** section.
+        You can find the version of Whisper in the application information in the 'settings' of your Android system.
       placeholder: |
         Example: "1.9"
     validations:
