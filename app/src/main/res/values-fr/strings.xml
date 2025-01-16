@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Whisper</string>
+
+    <string name="need_record_audio_permission">"L\'autorisation ENREGISTREMENT AUDIO n\'est pas accordée"</string>
+    <string name="error_download">Erreur de téléchargement</string>
+    <string name="download_model">Téléchargement de Modèle</string>
+    <string name="download_model_text">\nTélécharger les modèles Whisper à partir de Hugging Face (~350 MB)</string>
+    <string name="select_model">Sélectionner le modèle:</string>
+    <string name="status">Status:</string>
+    <string name="append">Ajouter:</string>
+    <string name="translate">Traduire en Anglais:</string>
+    <string name="copy">Copie</string>
+    <string name="processing">Traitement…</string>
+    <string name="start">Démarrage</string>
+    <string name="stop">Stop</string>
+    <string name="dialog_StarOnGitHub">Vous appréciez cette application? Donnez une étoile sur GitHub ou offrez un café au développeur via PayPal.</string>
+    <string name="dialog_Later_button">Plus tard, peut-être</string>
+    <string name="please_wait">Veuillez patienter…</string>
+    <string name="exit_button">Bouton de sortie</string>
+    <string name="record_button">Enregistrer</string>
+    <string name="return_button">Retour</string>
+    <string name="delete_button">Supprimer</string>
+    <string name="model_output">Résultats du modèle</string>
+    <string name="processing_done">Traitement réalisé en\u2009</string>
+    <string name="language">Langue:\u2009</string>
+    <string name="multi_lingual_slow">Multilingue, lent</string>
+    <string name="english_only_fast">Anglais uniquement, rapide</string>
+    <string name="multi_lingual_fast">Multilingue, rapide</string>
+</resources>

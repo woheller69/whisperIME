@@ -1,0 +1,17 @@
+Whisper est un éditeur de méthodes d'entrée (IME) avec reconnaissance vocale basé sur Whisper
+
+Il peut fonctionner en tant qu'application autonome et offre également un IME qui peut par exemple être activé
+via le bouton du microphone dans HeliBoard.
+
+Au premier démarrage, il est nécessaire de télécharger les modèles Whisper de Hugging Face.
+C'est la seule utilisation de la permission internet.
+
+La reconnaissance vocale fonctionne complètement hors ligne.
+
+En tant qu'application autonome, Whisper peut également traduire en anglais toutes les langues prises en charge.
+
+Pour tirer le meilleur parti de Whisper:
+- Appuyez sur le bouton et maintenez-le enfoncé pendant que vous parlez
+- Faites une courte pause avant de commencer à parler
+- Parlez clairement, à voix haute et à un rythme modéré.
+- Veuillez noter qu'il y a une limite de 30 secondes pour chaque enregistrement.
