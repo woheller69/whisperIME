@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dialog_Later_button">ربما لاحقًا</string>
+    <string name="please_wait">يرجى الانتظار…</string>
+    <string name="exit_button">خروج</string>
+    <string name="record_button">تسجيل</string>
+    <string name="return_button">عودة</string>
+    <string name="delete_button">حذف</string>
+    <string name="model_output">مخرجات النموذج</string>
+    <string name="processing_done">اكتملت المعالجة في </string>
+    <string name="language">اللغة: </string>
+    <string name="multi_lingual_slow">متعدد اللغات، بطيء</string>
+    <string name="english_only_fast">إنجليزي فقط، سريع</string>
+    <string name="multi_lingual_fast">متعدد اللغات، سريع</string>
+    <string name="mode_transcription">تفريغ صوتي</string>
+    <string name="mode_translation">ترجمة</string>
+    <string name="app_name">Whisper</string>
+    <string name="need_record_audio_permission">لم يتم منح إذن تسجيل الصوت</string>
+    <string name="error_download">خطأ في التنزيل</string>
+    <string name="download_model">تنزيل النموذج</string>
+    <string name="download_model_text">\nقم بتنزيل نماذج Whisper من Hugging Face (~350 ميجابايت)</string>
+    <string name="select_model">النموذج:</string>
+    <string name="status">الحالة:</string>
+    <string name="append">إلحاق:</string>
+    <string name="translate">ترجمة إلى الإنجليزية:</string>
+    <string name="copy">نسخ</string>
+    <string name="info">معلومات</string>
+    <string name="processing">جاري المعالجة…</string>
+    <string name="start">ابدأ</string>
+    <string name="dialog_StarOnGitHub">هل أعجبك هذا التطبيق؟ الرجاء منح نجمة على GitHub أو شراء قهوة للمطور عبر PayPal.</string>
+    <string name="instructions">اضغط مع الاستمرار على زر الميكروفون أثناء التحدث.</string>
+</resources>
