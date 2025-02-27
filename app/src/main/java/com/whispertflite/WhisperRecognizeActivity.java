@@ -10,10 +10,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -54,6 +57,13 @@ public class WhisperRecognizeActivity extends AppCompatActivity {
         initModel(selectedTfliteFile);
 
         setContentView(R.layout.activity_recognize);
+
+        // Set the window layout parameters
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
+        params.height =  WindowManager.LayoutParams.WRAP_CONTENT;
+        params.gravity = Gravity.BOTTOM; // Position at the bottom of the screen
+
         btnCancel = findViewById(R.id.btnCancel);
         btnRecord = findViewById(R.id.btnRecord);
         processingBar = findViewById(R.id.processing_bar);
