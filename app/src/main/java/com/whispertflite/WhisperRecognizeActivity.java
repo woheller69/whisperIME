@@ -31,7 +31,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class WhisperRecognizeActivity extends AppCompatActivity {
-    private static final String TAG = "WhisperRecognitionActivity";
+    private static final String TAG = "WhisperRecognizeActivity";
     private ImageButton btnRecord;
     private ImageButton btnCancel;
     private ProgressBar processingBar = null;
