@@ -1,0 +1,1 @@
+Reconhecimento de voz baseado no Whisper
