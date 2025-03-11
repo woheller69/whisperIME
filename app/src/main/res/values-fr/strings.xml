@@ -1,4 +1,6 @@
 <resources>
+    <string name="app_name" translatable="false">Whisper</string>
+    <string name="voice_input">Entrée vocale Whisper</string>
     <string name="need_record_audio_permission">"L\'autorisation ENREGISTREMENT AUDIO n\'est pas accordée"</string>
     <string name="error_download">Erreur de téléchargement</string>
     <string name="download_model">Téléchargement de Modèle</string>
@@ -26,4 +28,7 @@
     <string name="multi_lingual_fast">Multilingue, rapide</string>
     <string name="mode_transcription">transcription</string>
     <string name="mode_translation">traduction</string>
+    <string name="instructions">Appuyez et maintenez activé le bouton du microphone tout en parlant.</string>
+    <string name="recording_time">Durée d\'enregistrement maximale [s]</string>
+    <string name="settings_vad">Utiliser la détection d\'activité vocale (VAD)</string>
 </resources>
