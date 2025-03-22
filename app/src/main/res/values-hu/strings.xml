@@ -28,4 +28,6 @@
     <string name="mode_translation">fordítás</string>
     <string name="instructions">Beszéd közben nyomja meg és tartsa lenyomva a mikrofon gombot.</string>
     <string name="processing_done">Feldolgozva ennyi idő alatt </string>
+    <string name="update">FRISSÍTÉS</string>
+    <string name="voice_input">Whisper hangbevitel</string>
 </resources>
