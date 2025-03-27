@@ -1,0 +1,1 @@
+Recunoaștere vocală bazată pe Whisper
