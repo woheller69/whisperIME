@@ -31,4 +31,7 @@
     <string name="instructions">Press and hold the microphone button while speaking.</string>
     <string name="update">UPDATE</string>
     <string name="simple_chinese">Simplified Chinese:</string>
+    <string name="text_to_speech">Text-to-speech:</string>
+    <string name="tts_language_not_supported">TTS: Language not supported</string>
+    <string name="tts_initialization_failed">TTS: Initialization failed</string>
 </resources>

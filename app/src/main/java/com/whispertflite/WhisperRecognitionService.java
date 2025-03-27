@@ -124,7 +124,6 @@ public class WhisperRecognitionService extends RecognitionService {
     @Override
     protected void onStopListening(Callback callback) {
         Log.d(TAG,"StopListening");
-        deinitModel();
         stopRecording();
     }
 

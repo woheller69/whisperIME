@@ -119,6 +119,31 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/layout_tts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:gravity="start">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:text="@string/text_to_speech" />
+
+        <CheckBox
+            android:id="@+id/mode_tts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:contentDescription="@string/text_to_speech"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/layout_mode_chinese"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

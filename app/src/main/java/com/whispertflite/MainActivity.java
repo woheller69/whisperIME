@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import androidx.preference.PreferenceManager;
 import android.provider.Settings;
+import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,6 +47,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     private Context mContext;
@@ -67,9 +69,11 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton fabCopy;
     private ImageButton btnRecord;
     private LinearLayout layoutModeChinese;
+    private LinearLayout layoutTTS;
     private CheckBox append;
     private CheckBox translate;
     private CheckBox modeSimpleChinese;
+    private CheckBox modeTTS;
     private ProgressBar processingBar;
     private ImageButton btnInfo;
 
@@ -83,12 +87,13 @@ public class MainActivity extends AppCompatActivity {
     private CountDownTimer countDownTimer;
     private Spinner spinnerLanguage;
     private int langToken = -1;
-
     private long startTime = 0;
+    private TextToSpeech tts;
 
     @Override
     protected void onDestroy() {
         deinitModel();
+        deinitTTS();
         super.onDestroy();
     }
 
@@ -109,7 +114,34 @@ public class MainActivity extends AppCompatActivity {
         processingBar = findViewById(R.id.processing_bar);
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         append = findViewById(R.id.mode_append);
+
+        layoutTTS = findViewById(R.id.layout_tts);
+        modeTTS = findViewById(R.id.mode_tts);
+        modeTTS.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            if (isChecked) {
+                tts = new TextToSpeech(mContext, status -> {
+                    if (status == TextToSpeech.SUCCESS) {
+                        int result = tts.setLanguage(Locale.US);
+                        if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                            runOnUiThread(() -> {
+                                Toast.makeText(mContext, mContext.getString(R.string.tts_language_not_supported),Toast.LENGTH_SHORT).show();
+                                modeTTS.setChecked(false);
+                            });
+
+                        }
+                    } else {
+                        runOnUiThread(() -> Toast.makeText(mContext, mContext.getString(R.string.tts_initialization_failed),Toast.LENGTH_SHORT).show());
+                    }
+                });
+            }
+        });
+
         translate = findViewById(R.id.mode_translate);
+        translate.setOnCheckedChangeListener((compoundButton, isChecked) -> {
+            layoutTTS.setVisibility(isChecked ? View.VISIBLE:View.GONE);
+            if (layoutTTS.getVisibility() == View.GONE) modeTTS.setChecked(false);
+        });
+
         // Call the method to copy specific file types from assets to data folder
         sdcardDataFolder = this.getExternalFilesDir(null);
 
@@ -320,6 +352,9 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(() -> tvResult.append(whisperResult.getResult()));
                 }
                 runOnUiThread(() -> spinnerTflite.setEnabled(true));
+                if (modeTTS.isChecked()){
+                    tts.speak(whisperResult.getResult(), TextToSpeech.QUEUE_FLUSH, null, null);
+                }
             }
         });
     }
@@ -328,6 +363,13 @@ public class MainActivity extends AppCompatActivity {
         if (mWhisper != null) {
             mWhisper.unloadModel();
             mWhisper = null;
+        }
+    }
+
+    private void deinitTTS(){
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
         }
     }
 

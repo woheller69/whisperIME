@@ -28,4 +28,8 @@
     <string name="mode_transcription">Transkription</string>
     <string name="mode_translation">Übersetzung</string>
     <string name="instructions">Halten Sie die Mikrofontaste gedrückt während Sie sprechen.</string>
+    <string name="simple_chinese">Vereinfachtes Chinesisch:</string>
+    <string name="text_to_speech">Sprachausgabe:</string>
+    <string name="tts_language_not_supported">Sprachausgabe: Sprache nicht unterstützt</string>
+    <string name="tts_initialization_failed">Sprachausgabe: Initialisierung fehlgeschlagen</string>
 </resources>
