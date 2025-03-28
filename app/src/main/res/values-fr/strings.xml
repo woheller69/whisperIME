@@ -28,4 +28,9 @@
     <string name="mode_transcription">transcription</string>
     <string name="mode_translation">traduction</string>
     <string name="instructions">Appuyez et maintenez activé le bouton du microphone tout en parlant.</string>
+    <string name="update">MISE À JOUR</string>
+    <string name="simple_chinese">Sinogrammes simplifiés:</string>
+    <string name="text_to_speech">Synthèse vocale:</string>
+    <string name="tts_language_not_supported">SV: Langue non prise en charge</string>
+    <string name="tts_initialization_failed">SV: Échec de l\’initialisation</string>
 </resources>
