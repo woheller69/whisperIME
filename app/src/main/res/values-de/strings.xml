@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="voice_input">Whisper Spracheingabe</string>
     <string name="need_record_audio_permission">"RECORD_AUDIO Berechtigung fehlt"</string>
@@ -21,7 +22,7 @@
     <string name="delete_button">Löschen</string>
     <string name="model_output">Modellausgabe</string>
     <string name="processing_done">Verarbeitet in\u2009</string>
-    <string name="language">Sprache:\u2009</string>
+    <string name="language">Sprache: </string>
     <string name="multi_lingual_slow">Mehrsprachig, langsam</string>
     <string name="english_only_fast">Nur Englisch, schnell</string>
     <string name="multi_lingual_fast">Mehrsprachig, schnell</string>

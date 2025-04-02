@@ -8,7 +8,7 @@
     <string name="delete_button">حذف</string>
     <string name="model_output">مخرجات النموذج</string>
     <string name="processing_done">اكتملت المعالجة في </string>
-    <string name="language">اللغة: </string>
+    <string name="language">اللغة:</string>
     <string name="multi_lingual_slow">متعدد اللغات، بطيء</string>
     <string name="english_only_fast">إنجليزي فقط، سريع</string>
     <string name="multi_lingual_fast">متعدد اللغات، سريع</string>
@@ -28,4 +28,10 @@
     <string name="start">ابدأ</string>
     <string name="dialog_StarOnGitHub">هل أعجبك هذا التطبيق؟ الرجاء منح نجمة على GitHub أو شراء قهوة للمطور عبر PayPal.</string>
     <string name="instructions">اضغط مع الاستمرار على زر الميكروفون أثناء التحدث.</string>
+    <string name="update">تحديث</string>
+    <string name="simple_chinese">الصينية المبسطة:</string>
+    <string name="voice_input">الإدخال الصوتي لويسبر</string>
+    <string name="text_to_speech">تحويل النص إلى كلام:</string>
+    <string name="tts_language_not_supported">تحويل النص إلى كلام: اللغة غير مدعومة</string>
+    <string name="tts_initialization_failed">تحويل النص إلى كلام: فشلت التهيئة</string>
 </resources>

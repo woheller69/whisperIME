@@ -22,7 +22,7 @@
     <string name="delete_button">Удалить</string>
     <string name="model_output">Выход модели</string>
     <string name="processing_done">Обработка выполненная за </string>
-    <string name="language">Язык: </string>
+    <string name="language">Язык:</string>
     <string name="english_only_fast">Только английский, быстро</string>
     <string name="multi_lingual_fast">Многоязычный, быстро</string>
     <string name="mode_transcription">транскрипция</string>

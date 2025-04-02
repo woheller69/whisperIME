@@ -20,7 +20,7 @@
     <string name="record_button">Gravar</string>
     <string name="delete_button">Excluir</string>
     <string name="model_output">Saída do modelo</string>
-    <string name="language">Idioma: </string>
+    <string name="language">Idioma:</string>
     <string name="multi_lingual_slow">Multi-idioma, lento</string>
     <string name="english_only_fast">Somente inglês, rápido</string>
     <string name="multi_lingual_fast">Multi-idioma, rápido</string>
@@ -30,4 +30,8 @@
     <string name="processing_done">Processamento concluído em </string>
     <string name="voice_input">Entrada de Voz Whisper</string>
     <string name="update">ATUALIZAR</string>
+    <string name="simple_chinese">Chinês Simplificado:</string>
+    <string name="text_to_speech">Texto-para-fala:</string>
+    <string name="tts_language_not_supported">Texto para fala: O idioma não é suportado</string>
+    <string name="tts_initialization_failed">Texto para fala: A inicialização falhou</string>
 </resources>
