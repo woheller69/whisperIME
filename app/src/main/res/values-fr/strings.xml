@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="voice_input">Entrée vocale Whisper</string>
     <string name="need_record_audio_permission">"L\'autorisation ENREGISTREMENT AUDIO n\'est pas accordée"</string>
@@ -21,7 +22,7 @@
     <string name="delete_button">Supprimer</string>
     <string name="model_output">Résultats du modèle</string>
     <string name="processing_done">Traitement réalisé en\u2009</string>
-    <string name="language">Langue:\u2009</string>
+    <string name="language">Langue: </string>
     <string name="multi_lingual_slow">Multilingue, lent</string>
     <string name="english_only_fast">Anglais uniquement, rapide</string>
     <string name="multi_lingual_fast">Multilingue, rapide</string>

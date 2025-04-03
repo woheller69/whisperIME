@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voice_input">קלט קולי לחישה</string>
+    <string name="need_record_audio_permission">הרשאת RECORD_AUDIO לא ניתנה</string>
+    <string name="error_download">שיגאת הורדה</string>
+    <string name="download_model">מודל הורדה</string>
+    <string name="download_model_text">\nהורד דגמי Whisper מ-Huging Face (~370 MB)</string>
+    <string name="select_model">מודל:</string>
+    <string name="status">סטטוס:</string>
+    <string name="append">צירוף:</string>
+    <string name="translate">תרגם לאנגלית:</string>
+    <string name="copy_to_clipboard">העתק</string>
+    <string name="info">מידע</string>
+    <string name="processing">מעבד…</string>
+    <string name="start">התחל</string>
+    <string name="dialog_StarOnGitHub">האם אתה אוהב את האפליקציה הזו? נא לתת כוכב ב-GitHub או לקנות למפתח קפה דרך PayPal.</string>
+    <string name="dialog_Later_button">אולי אחר כך</string>
+</resources>
