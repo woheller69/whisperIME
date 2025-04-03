@@ -1,7 +1,7 @@
 Whisper is an input method editor (IME) with voice recognition based on Whisper
 
 It can work as standalone app and also offers an IME which can e.g. be activated
-via the microphone button in HeliBoard.
+via the microphone button in <a href="https://f-droid.org/packages/helium314.keyboard/">HeliBoard</a>.
 
 At first start it needs to download the Whisper models from Hugging Face.
 This is the only use of the internet permission.
@@ -11,7 +11,9 @@ Voice recognition works completely offline.
 As standalone app Whisper can also translate any supported language to English.
 
 To get the most out of Whisper:
-- Press and hold the button while speaking
-- Pause briefly before starting to speak
-- Speak clearly, loudly, and at a moderate pace
-- Please note that there is a limit of 30s for each recording
+<ul>
+<li>Press and hold the button while speaking</li>
+<li>Pause briefly before starting to speak</li>
+<li>Speak clearly, loudly, and at a moderate pace</li>
+<li>Please note that there is a limit of 30s for each recording</li>
+</ul>

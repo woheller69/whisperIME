@@ -1,7 +1,7 @@
 A Whisper egy hangfelismerésen alapuló beviteli módszer-szerkesztő (IME), amely a Whisper
 
 Önálló alkalmazásként is működhet, és olyan IME-t is kínál, amely például aktiválható
-a HeliBoard mikrofon gombjával.
+a <a href="https://f-droid.org/packages/helium314.keyboard/">HeliBoard</a> mikrofon gombjával.
 
 Első indításkor le kell tölteni a Whisper modelleket az Hugging Face-ről.
 Ez az egyetlen alkalom, amikor az internet engedélyt használja.
@@ -11,7 +11,9 @@ A hangfelismerés teljesen offline működik.
 Önálló alkalmazásként a Whisper bármely támogatott nyelvet le tud fordítani angolra.
 
 Ahhoz, hogy a legtöbbet hozza ki a Whisperből:
-- Nyomja meg és tartsa lenyomva a gombot beszéd közben
-- Rövid szünet a beszéd megkezdése előtt
-- Beszéljen tisztán, hangosan és mérsékelt tempóban
-- Felhívjuk figyelmét, hogy minden egyes hangfelvételre 30 másodperces korlát van érvényben
+<ul>
+<li>Nyomja meg és tartsa lenyomva a gombot beszéd közben</li>
+<li>Rövid szünet a beszéd megkezdése előtt</li>
+<li>Beszéljen tisztán, hangosan és mérsékelt tempóban</li>
+<li>Felhívjuk figyelmét, hogy minden egyes hangfelvételre 30 másodperces korlát van érvényben</li>
+</ul>
