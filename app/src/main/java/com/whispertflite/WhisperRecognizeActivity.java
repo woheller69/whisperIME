@@ -4,7 +4,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.whispertflite.MainActivity.ENGLISH_ONLY_MODEL_EXTENSION;
 import static com.whispertflite.MainActivity.ENGLISH_ONLY_VOCAB_FILE;
 import static com.whispertflite.MainActivity.MULTILINGUAL_VOCAB_FILE;
-import static com.whispertflite.MainActivity.MULTI_LINGUAL_MODEL_SLOW;
+import static com.whispertflite.MainActivity.MULTI_LINGUAL_TOP_WORLD_SLOW;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -59,7 +59,7 @@ public class WhisperRecognizeActivity extends AppCompatActivity {
         mContext = this;
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         sdcardDataFolder = this.getExternalFilesDir(null);
-        selectedTfliteFile = new File(sdcardDataFolder, sp.getString("modelName", MULTI_LINGUAL_MODEL_SLOW));
+        selectedTfliteFile = new File(sdcardDataFolder, sp.getString("modelName", MULTI_LINGUAL_TOP_WORLD_SLOW));
         if (!selectedTfliteFile.exists()) {
             Intent intent = new Intent(this, DownloadActivity.class);
             intent.addFlags(FLAG_ACTIVITY_NEW_TASK);
@@ -108,6 +108,14 @@ public class WhisperRecognizeActivity extends AppCompatActivity {
                     HapticFeedback.vibrate(mContext);
                     runOnUiThread(() -> btnRecord.setBackgroundResource(R.drawable.rounded_button_background));
                     startTranscription();
+                } else if (message.equals(Recorder.MSG_RECORDING_ERROR)) {
+                    HapticFeedback.vibrate(mContext);
+                    if (countDownTimer!=null) { countDownTimer.cancel();}
+                    runOnUiThread(() -> {
+                        btnRecord.setBackgroundResource(R.drawable.rounded_button_background);
+                        processingBar.setProgress(0);
+                        Toast.makeText(mContext,R.string.error_no_input,Toast.LENGTH_SHORT).show();
+                    });
                 }
             }
 

@@ -18,7 +18,7 @@ Besides providing an IME, whisper can also be selected as system-wide voice inpu
 
 ## Initial Setup
 
-Upon launching Whisper for the first time, the app will download the necessary Whisper models (~370 MB) from Hugging Face. 
+Upon launching Whisper for the first time, the app will download the necessary Whisper models (~435 MB) from Hugging Face. 
 Please note that this is the only instance where internet permission is required. 
 Once the models are downloaded, voice recognition works entirely offline, ensuring your privacy and convenience.
 

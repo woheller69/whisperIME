@@ -36,6 +36,8 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
 
     // whisper-small.tflite works well for multi-lingual
     public static final String MULTI_LINGUAL_EU_MODEL_FAST = "whisper-base.EUROPEAN_UNION.tflite";
+    public static final String MULTI_LINGUAL_TOP_WORLD_FAST = "whisper-base.TOP_WORLD.tflite";
+    public static final String MULTI_LINGUAL_TOP_WORLD_SLOW = "whisper-small.TOP_WORLD.tflite";
     public static final String MULTI_LINGUAL_MODEL_FAST = "whisper-base.tflite";
     public static final String MULTI_LINGUAL_MODEL_SLOW = "whisper-small.tflite";
     public static final String ENGLISH_ONLY_MODEL = "whisper-tiny.en.tflite";
@@ -65,14 +67,14 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
         sp = PreferenceManager.getDefaultSharedPreferences(this);
 
         spinnerLanguage = findViewById(R.id.spnrLanguage);
-        String[] eu_languages = getResources().getStringArray(R.array.eu_languages);
-        ArrayAdapter<String> lang = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, eu_languages);
+        String[] top40_languages = getResources().getStringArray(R.array.top40_languages);
+        ArrayAdapter<String> lang = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, top40_languages);
         spinnerLanguage.setAdapter(lang);
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putString("recognitionServiceLanguage",eu_languages[i]);
+                editor.putString("recognitionServiceLanguage",top40_languages[i]);
                 editor.apply();
             }
 
@@ -87,16 +89,16 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
 
         ArrayList<File> tfliteFiles = getFilesWithExtension(sdcardDataFolder, ".tflite");
 
-        selectedTfliteFile = new File(sdcardDataFolder, sp.getString("recognitionServiceModelName", MULTI_LINGUAL_MODEL_SLOW));
+        selectedTfliteFile = new File(sdcardDataFolder, sp.getString("recognitionServiceModelName", MULTI_LINGUAL_TOP_WORLD_SLOW));
         ArrayAdapter<File> tfliteAdapter = getFileArrayAdapter(tfliteFiles);
         int position = tfliteAdapter.getPosition(selectedTfliteFile);
         spinnerTflite = findViewById(R.id.spnrTfliteFiles);
         spinnerTflite.setAdapter(tfliteAdapter);
         spinnerTflite.setSelection(position,false);
-        if (selectedTfliteFile.getName().equals(MULTI_LINGUAL_EU_MODEL_FAST)){
+        if (selectedTfliteFile.getName().equals(MULTI_LINGUAL_EU_MODEL_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_SLOW)){
             spinnerLanguage.setEnabled(true);
             String langCode = sp.getString("recognitionServiceLanguage", "auto");
-            spinnerLanguage.setSelection(Arrays.asList(eu_languages).indexOf(langCode));
+            spinnerLanguage.setSelection(Arrays.asList(top40_languages).indexOf(langCode));
         } else {
             spinnerLanguage.setSelection(0);
             spinnerLanguage.setEnabled(false);
@@ -108,10 +110,10 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
                 SharedPreferences.Editor editor = sp.edit();
                 editor.putString("recognitionServiceModelName",selectedTfliteFile.getName());
                 editor.apply();
-                if (selectedTfliteFile.getName().equals(MULTI_LINGUAL_EU_MODEL_FAST)){
+                if (selectedTfliteFile.getName().equals(MULTI_LINGUAL_EU_MODEL_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_SLOW)){
                     spinnerLanguage.setEnabled(true);
                     String langCode = sp.getString("recognitionServiceLanguage", "auto");
-                    spinnerLanguage.setSelection(Arrays.asList(eu_languages).indexOf(langCode));
+                    spinnerLanguage.setSelection(Arrays.asList(top40_languages).indexOf(langCode));
                 } else {
                     spinnerLanguage.setSelection(0);
                     spinnerLanguage.setEnabled(false);
@@ -143,11 +145,15 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
                 TextView textView = view.findViewById(android.R.id.text1);
                 if ((getItem(position).getName()).equals(MULTI_LINGUAL_MODEL_SLOW))
                     textView.setText(R.string.multi_lingual_slow);
+                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_TOP_WORLD_SLOW))
+                    textView.setText(R.string.multi_lingual_slow);
                 else if ((getItem(position).getName()).equals(ENGLISH_ONLY_MODEL))
                     textView.setText(R.string.english_only_fast);
                 else if ((getItem(position).getName()).equals(MULTI_LINGUAL_MODEL_FAST))
                     textView.setText(R.string.multi_lingual_fast);
                 else if ((getItem(position).getName()).equals(MULTI_LINGUAL_EU_MODEL_FAST))
+                    textView.setText(R.string.multi_lingual_fast);
+                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_TOP_WORLD_FAST))
                     textView.setText(R.string.multi_lingual_fast);
                 else
                     textView.setText(getItem(position).getName().substring(0, getItem(position).getName().length() - ".tflite".length()));
@@ -161,11 +167,15 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
                 TextView textView = view.findViewById(android.R.id.text1);
                 if ((getItem(position).getName()).equals(MULTI_LINGUAL_MODEL_SLOW))
                     textView.setText(R.string.multi_lingual_slow);
+                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_TOP_WORLD_SLOW))
+                    textView.setText(R.string.multi_lingual_slow);
                 else if ((getItem(position).getName()).equals(ENGLISH_ONLY_MODEL))
                     textView.setText(R.string.english_only_fast);
                 else if ((getItem(position).getName()).equals(MULTI_LINGUAL_MODEL_FAST))
                     textView.setText(R.string.multi_lingual_fast);
                 else if ((getItem(position).getName()).equals(MULTI_LINGUAL_EU_MODEL_FAST))
+                    textView.setText(R.string.multi_lingual_fast);
+                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_TOP_WORLD_FAST))
                     textView.setText(R.string.multi_lingual_fast);
                 else
                     textView.setText(getItem(position).getName().substring(0, getItem(position).getName().length() - ".tflite".length()));

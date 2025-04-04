@@ -6,7 +6,7 @@ import static android.speech.SpeechRecognizer.ERROR_LANGUAGE_UNAVAILABLE;
 import static com.whispertflite.MainActivity.ENGLISH_ONLY_MODEL_EXTENSION;
 import static com.whispertflite.MainActivity.ENGLISH_ONLY_VOCAB_FILE;
 import static com.whispertflite.MainActivity.MULTILINGUAL_VOCAB_FILE;
-import static com.whispertflite.MainActivity.MULTI_LINGUAL_MODEL_SLOW;
+import static com.whispertflite.MainActivity.MULTI_LINGUAL_TOP_WORLD_SLOW;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -62,7 +62,7 @@ public class WhisperRecognitionService extends RecognitionService {
         checkRecordPermission(callback);
 
         sdcardDataFolder = this.getExternalFilesDir(null);
-        selectedTfliteFile = new File(sdcardDataFolder, sp.getString("recognitionServiceModelName", MULTI_LINGUAL_MODEL_SLOW));
+        selectedTfliteFile = new File(sdcardDataFolder, sp.getString("recognitionServiceModelName", MULTI_LINGUAL_TOP_WORLD_SLOW));
 
         if (!selectedTfliteFile.exists()) {
             try {
@@ -92,6 +92,12 @@ public class WhisperRecognitionService extends RecognitionService {
                         throw new RuntimeException(e);
                     }
                     startTranscription();
+                } else if (message.equals(Recorder.MSG_RECORDING_ERROR)) {
+                    try {
+                        callback.error(ERROR_CLIENT);
+                    } catch (RemoteException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             });
 

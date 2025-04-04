@@ -1,33 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="eu_languages">
+    <string-array name="top40_languages">
         <item>auto</item>
-        <item>en</item>
-        <item>de</item>
-        <item>es</item>
-        <item>fr</item>
-        <item>pt</item>
-        <item>tr</item>
-        <item>pl</item>
-        <item>nl</item>
-        <item>sv</item>
-        <item>it</item>
-        <item>fi</item>
-        <item>el</item>
-        <item>cs</item>
-        <item>ro</item>
-        <item>da</item>
-        <item>hu</item>
-        <item>no</item>
-        <item>hr</item>
+        <item>ar</item>
         <item>bg</item>
-        <item>lt</item>
-        <item>sk</item>
-        <item>lv</item>
-        <item>sl</item>
+        <item>ca</item>
+        <item>cs</item>
+        <item>da</item>
+        <item>de</item>
+        <item>el</item>
+        <item>en</item>
+        <item>es</item>
         <item>et</item>
-        <item>mt</item>
+        <item>fi</item>
+        <item>fr</item>
+        <item>he</item>
+        <item>hr</item>
+        <item>hu</item>
+        <item>id</item>
+        <item>it</item>
+        <item>ja</item>
+        <item>ko</item>
         <item>lb</item>
+        <item>lt</item>
+        <item>lv</item>
+        <item>ms</item>
+        <item>mt</item>
+        <item>nl</item>
+        <item>no</item>
+        <item>pl</item>
+        <item>pt</item>
+        <item>ro</item>
+        <item>ru</item>
+        <item>sk</item>
+        <item>sl</item>
+        <item>sv</item>
+        <item>ta</item>
+        <item>th</item>
+        <item>tr</item>
+        <item>uk</item>
+        <item>ur</item>
+        <item>vi</item>
+        <item>zh</item>
     </string-array>
 
 </resources>

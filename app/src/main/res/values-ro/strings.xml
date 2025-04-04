@@ -30,7 +30,7 @@
     <string name="update">ACTUALIZARE</string>
     <string name="dialog_StarOnGitHub">Îți place această aplicație? Dă o stea pe Github sau cumpără dezvoltatorului o cafea prin PayPal.</string>
     <string name="voice_input">Intrare vocală Whisper</string>
-    <string name="download_model_text">\nDescarcă modelele Whisper de pe Hugging Face (~370 MB)</string>
+    <string name="download_model_text">\nDescarcă modelele Whisper de pe Hugging Face (~435 MB)</string>
     <string name="text_to_speech">Text-în-voce:</string>
     <string name="tts_language_not_supported">TTS: Limba nu este acceptată</string>
     <string name="tts_initialization_failed">TTS: Inițializarea eșuată</string>

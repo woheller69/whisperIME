@@ -4,7 +4,7 @@
     <string name="need_record_audio_permission">"L\'autorisation ENREGISTREMENT AUDIO n\'est pas accordée"</string>
     <string name="error_download">Erreur de téléchargement</string>
     <string name="download_model">Téléchargement de Modèle</string>
-    <string name="download_model_text">\nTélécharger les modèles Whisper à partir de Hugging Face (~370 MB)</string>
+    <string name="download_model_text">\nTélécharger les modèles Whisper à partir de Hugging Face (~435 MB)</string>
     <string name="select_model">Modèle:</string>
     <string name="status">Status:</string>
     <string name="append">Ajouter:</string>

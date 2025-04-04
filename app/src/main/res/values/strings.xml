@@ -5,7 +5,7 @@
     <string name="need_record_audio_permission">"RECORD_AUDIO permission is not granted"</string>
     <string name="error_download">Download error</string>
     <string name="download_model">Download Model</string>
-    <string name="download_model_text">\nDownload Whisper models from Hugging Face (~370 MB)</string>
+    <string name="download_model_text">\nDownload Whisper models from Hugging Face (~435 MB)</string>
     <string name="select_model">Model:</string>
     <string name="status">Status:</string>
     <string name="append">Append:</string>
@@ -36,4 +36,5 @@
     <string name="tts_language_not_supported">TTS: Language not supported</string>
     <string name="tts_initialization_failed">TTS: Initialization failed</string>
     <string name="auto_button">automatic mode</string>
+    <string name="error_no_input">No voice input received</string>
 </resources>

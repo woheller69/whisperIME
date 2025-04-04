@@ -2,7 +2,7 @@
 <resources>
     <string name="append">Anexar:</string>
     <string name="return_button">Voltar</string>
-    <string name="download_model_text">\nBaixar modelos Whisper do Hugging Face (~370 MB)</string>
+    <string name="download_model_text">\nBaixar modelos Whisper do Hugging Face (~435 MB)</string>
     <string name="dialog_StarOnGitHub">Você gosta deste app? Dê-o uma estrela no GitHub ou compre um café para o desenvolvedor no PayPal.</string>
     <string name="error_download">Erro ao baixar</string>
     <string name="download_model">Baixar Modelo</string>

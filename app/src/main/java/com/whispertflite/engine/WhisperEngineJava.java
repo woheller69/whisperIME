@@ -158,7 +158,11 @@ public class WhisperEngineJava implements WhisperEngine {
         outputsMap.put(outputs[0], outputBuffer.getBuffer());
 
         // Run inference
-        mInterpreter.runSignature(inputsMap, outputsMap, signature_key);
+        try {
+            mInterpreter.runSignature(inputsMap, outputsMap, signature_key);
+        } catch (Exception e) {
+            return new WhisperResult("", "", mAction);
+        }
 
         // Retrieve the results
         ArrayList<InputLang> inputLangList = InputLang.getLangList();

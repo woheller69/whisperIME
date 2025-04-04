@@ -5,7 +5,7 @@
     <string name="need_record_audio_permission">Разрешение Запись аудио (RECORD_AUDIO) не предоставлено</string>
     <string name="error_download">Ошибка при скачивании</string>
     <string name="download_model">Скачать модель</string>
-    <string name="download_model_text">\nСкачать модели Whisper из Hugging Face (~370 MB)</string>
+    <string name="download_model_text">\nСкачать модели Whisper из Hugging Face (~435 MB)</string>
     <string name="select_model">Модель:</string>
     <string name="status">Состояние:</string>
     <string name="append">Добавить:</string>

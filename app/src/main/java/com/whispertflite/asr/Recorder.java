@@ -35,6 +35,7 @@ public class Recorder {
     public static final String ACTION_RECORD = "Record";
     public static final String MSG_RECORDING = "Recording...";
     public static final String MSG_RECORDING_DONE = "Recording done...!";
+    public static final String MSG_RECORDING_ERROR = "Recording error...";
 
     private final Context mContext;
     private final AtomicBoolean mInProgress = new AtomicBoolean(false);
@@ -222,7 +223,11 @@ public class Recorder {
 
         // Save recorded audio data to BufferStore (up to 30 seconds)
         RecordBuffer.setOutputBuffer(outputBuffer.toByteArray());
-        sendUpdate(MSG_RECORDING_DONE);
+        if (totalBytesRead > 6400){  //min 0.2s
+            sendUpdate(MSG_RECORDING_DONE);
+        } else {
+            sendUpdate(MSG_RECORDING_ERROR);
+        }
 
         // Notify the waiting thread that recording is complete
         synchronized (fileSavedLock) {
