@@ -30,4 +30,10 @@
     <string name="processing_done">Feldolgozva ennyi idő alatt </string>
     <string name="update">FRISSÍTÉS</string>
     <string name="voice_input">Whisper hangbevitel</string>
+    <string name="error_no_input">Nincs hangbevitel</string>
+    <string name="simple_chinese">Egyszerűsített kínai:</string>
+    <string name="auto_button">automatikus üzemmód</string>
+    <string name="text_to_speech">Szövegből beszéddé alakítás:</string>
+    <string name="tts_language_not_supported">TTS: Nem támogatott nyelv</string>
+    <string name="tts_initialization_failed">TTS: Az előkészítés sikertelen</string>
 </resources>
