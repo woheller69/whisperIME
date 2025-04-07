@@ -34,4 +34,6 @@
     <string name="text_to_speech">Texto-para-fala:</string>
     <string name="tts_language_not_supported">Texto para fala: O idioma não é suportado</string>
     <string name="tts_initialization_failed">Texto para fala: A inicialização falhou</string>
+    <string name="auto_button">modo automático</string>
+    <string name="error_no_input">Nenhuma entrada de voz recebida</string>
 </resources>
