@@ -1,0 +1,3 @@
+New multilingual models with language preselection
+New automatic mode
+Translations
