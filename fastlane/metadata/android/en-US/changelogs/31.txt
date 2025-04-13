@@ -1,0 +1,3 @@
+Allow higher memory allocation
+Bugfixes
+Translations

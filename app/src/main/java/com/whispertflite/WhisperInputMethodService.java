@@ -299,8 +299,9 @@ public class WhisperInputMethodService extends InputMethodService {
                     boolean simpleChinese = sp.getBoolean("simpleChinese",false);
                     result = simpleChinese ? ZhConverterUtil.toSimple(result) : ZhConverterUtil.toTraditional(result);
                 }
-                if (result.trim().length() > 0) getCurrentInputConnection().commitText(result.trim() + " ",1);
-                if (modeAuto) switchToPreviousInputMethod();
+                boolean commitSuccess = false;
+                if (result.trim().length() > 0) commitSuccess = getCurrentInputConnection().commitText(result.trim() + " ",1);
+                if (modeAuto && commitSuccess) switchToPreviousInputMethod();
             }
         });
     }
