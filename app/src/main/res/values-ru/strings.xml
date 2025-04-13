@@ -28,4 +28,13 @@
     <string name="mode_transcription">транскрипция</string>
     <string name="mode_translation">перевод</string>
     <string name="translate">Перевести на английский:</string>
+    <string name="update">ОБНОВИТЬ</string>
+    <string name="auto_button">автоматический режим</string>
+    <string name="tts_initialization_failed">TTS: Сбой инициализации</string>
+    <string name="error_no_input">Не получено ввода голоса</string>
+    <string name="simple_chinese">Китайский (упрощённый):</string>
+    <string name="text_to_speech">Синтез речи:</string>
+    <string name="tts_language_not_supported">TTS: Язык не поддерживается</string>
+    <string name="voice_input">Источник голоса для Whisper</string>
+    <string name="instructions">Нажмите и удерживайте микрофон пока говорите.</string>
 </resources>
