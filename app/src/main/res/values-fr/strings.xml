@@ -34,4 +34,6 @@
     <string name="text_to_speech">Synthèse vocale:</string>
     <string name="tts_language_not_supported">SV: Langue non prise en charge</string>
     <string name="tts_initialization_failed">SV: Échec de l\'initialisation</string>
+    <string name="auto_button">mode automatique</string>
+    <string name="error_no_input">Aucune entrée vocale reçue</string>
 </resources>
