@@ -151,7 +151,8 @@ public class WhisperUtil {
     }
 
     // nSamples size => WHISPER_SAMPLE_RATE * WHISPER_CHUNK_SIZE => 480000
-    public float[] getMelSpectrogram(float[] samples, int nSamples, int nThreads) {
+    // meaningfulSamples is the part which contains recorded data
+    public float[] getMelSpectrogram(float[] samples, int nSamples, int meaningfulSamples, int nThreads) {
 
         int fftSize = WHISPER_N_FFT;
         int fftStep = WHISPER_HOP_LENGTH;
@@ -159,6 +160,9 @@ public class WhisperUtil {
         mel.nMel = WHISPER_N_MEL;
         mel.nLen = nSamples / fftStep;
         mel.data = new float[mel.nMel * mel.nLen];
+
+        // Calculate the number of meaningful frames
+        int meaningfulFrames = meaningfulSamples / fftStep;
 
         float[] hann = new float[fftSize];
         for (int i = 0; i < fftSize; i++) {
@@ -179,13 +183,13 @@ public class WhisperUtil {
                 Arrays.fill(fftIn, 0.0f);
                 float[] fftOut = new float[fftSize * 2];
 
-                for (int i = ith; i < mel.nLen; i += nThreads) {
+                for (int i = ith; i < meaningfulFrames; i += nThreads) { // Limit to meaningful frames
 
                     int offset = i * fftStep;
 
                     // apply Hanning window
                     for (int j = 0; j < fftSize; j++) {
-                        if (offset + j < nSamples) {
+                        if (offset + j < meaningfulSamples) { // Limit to meaningful samples
                             fftIn[j] = hann[j] * samples[offset + j];
                         } else {
                             fftIn[j] = 0.0f;
@@ -215,6 +219,13 @@ public class WhisperUtil {
 
                         sum = log10(sum);
                         mel.data[j * mel.nLen + i] = (float) sum;
+                    }
+                }
+
+                // Pad the remaining frames with a default value (e.g., -8.0)
+                for (int i = ith + meaningfulFrames; i < mel.nLen; i += nThreads) {
+                    for (int j = 0; j < mel.nMel; j++) {
+                        mel.data[j * mel.nLen + i] = -8.0f; // Default padding value
                     }
                 }
 

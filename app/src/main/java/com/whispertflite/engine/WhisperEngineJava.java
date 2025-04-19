@@ -97,6 +97,7 @@ public class WhisperEngineJava implements WhisperEngine {
 
         // Set the number of threads for inference
         Interpreter.Options options = new Interpreter.Options();
+        options.setUseXNNPACK(false);  //cannot be used due to dynamic tensors
         options.setNumThreads(Runtime.getRuntime().availableProcessors());
         options.setCancellable(true);
 
@@ -113,7 +114,7 @@ public class WhisperEngineJava implements WhisperEngine {
         System.arraycopy(samples, 0, inputSamples, 0, copyLength);
 
         int cores = Runtime.getRuntime().availableProcessors();
-        return mWhisperUtil.getMelSpectrogram(inputSamples, inputSamples.length, cores);
+        return mWhisperUtil.getMelSpectrogram(inputSamples, inputSamples.length, copyLength, cores);
     }
 
     private WhisperResult runInference(float[] inputData, Whisper.Action mAction, int mLangToken) {
