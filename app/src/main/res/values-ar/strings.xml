@@ -17,7 +17,7 @@
     <string name="need_record_audio_permission">لم يتم منح إذن تسجيل الصوت</string>
     <string name="error_download">خطأ في التنزيل</string>
     <string name="download_model">تنزيل النموذج</string>
-    <string name="download_model_text">\nقم بتنزيل نماذج Whisper من Hugging Face (~370 ميجابايت)</string>
+    <string name="download_model_text">\nقم بتنزيل نماذج Whisper من Hugging Face (~435 ميجابايت)</string>
     <string name="select_model">النموذج:</string>
     <string name="status">الحالة:</string>
     <string name="append">إلحاق:</string>
@@ -34,4 +34,6 @@
     <string name="text_to_speech">تحويل النص إلى كلام:</string>
     <string name="tts_language_not_supported">تحويل النص إلى كلام: اللغة غير مدعومة</string>
     <string name="tts_initialization_failed">تحويل النص إلى كلام: فشلت التهيئة</string>
+    <string name="auto_button">الوضع التلقائي</string>
+    <string name="error_no_input">لم يتم تلقي أي إدخال صوتي</string>
 </resources>

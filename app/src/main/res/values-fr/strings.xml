@@ -6,13 +6,13 @@
     <string name="download_model">Téléchargement de Modèle</string>
     <string name="download_model_text">\nTélécharger les modèles Whisper à partir de Hugging Face (~435 MB)</string>
     <string name="select_model">Modèle:</string>
-    <string name="status">Status:</string>
+    <string name="status">Statut:</string>
     <string name="append">Ajouter:</string>
     <string name="translate">Traduire en Anglais:</string>
     <string name="copy_to_clipboard">Copie</string>
     <string name="info">Informations</string>
     <string name="processing">Traitement…</string>
-    <string name="start">Démarrage</string>
+    <string name="start">Démarrer</string>
     <string name="dialog_StarOnGitHub">Vous appréciez cette application? Donnez une étoile sur GitHub ou offrez un café au développeur via PayPal.</string>
     <string name="dialog_Later_button">Plus tard, peut-être</string>
     <string name="please_wait">Veuillez patienter…</string>
