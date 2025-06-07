@@ -1,0 +1,19 @@
+Whisper 是一款基于 Whisper 的语音识别输入法编辑器（IME）
+
+它既可以作为独立应用运行，也可以作为输入法使用，
+例如通过 <a href="https://f-droid.org/packages/helium314.keyboard/">HeliBoard</a> 中的麦克风按钮激活。
+
+首次启动时，它需要从 Hugging Face 下载 Whisper 模型。
+这是唯一需要互联网权限的情况。
+
+语音识别功能完全离线运行。
+
+作为独立应用，Whisper 还可以将任何支持的语言翻译成英文。
+
+为了更好地使用 Whisper：
+<ul>
+<li>说话时按住按钮</li>
+<li>开始说话前请稍作停顿</li>
+<li>请清晰、大声且以适中的语速说话</li>
+<li>请注意，每次录音时间限制为 30 秒</li>
+</ul>

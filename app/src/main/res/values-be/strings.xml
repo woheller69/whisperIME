@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voice_input">Галасавы ўвод Whisper</string>
+    <string name="translate">Перакласць на англійскую мову:</string>
+    <string name="error_download">Памылка спампоўкі</string>
+    <string name="download_model">Спампаваць мадэль</string>
+    <string name="download_model_text">\nСпампаваць мадэлі Whisper з Hugging Face (~435 MB)</string>
+    <string name="select_model">Мадэль:</string>
+    <string name="status">Стан:</string>
+    <string name="append">Дадаць:</string>
+    <string name="copy_to_clipboard">Капіраваць</string>
+    <string name="info">Інфармацыя</string>
+    <string name="processing">Апрацоўваецца…</string>
+    <string name="start">ПАЧАЦЬ</string>
+    <string name="dialog_Later_button">Магчыма пазней</string>
+    <string name="please_wait">Пачакайце калі ласка…</string>
+    <string name="exit_button">Выйсці</string>
+    <string name="record_button">Запіс</string>
+    <string name="return_button">Вярнуцца</string>
+    <string name="delete_button">Выдаліць</string>
+    <string name="model_output">Адказ мадэлі</string>
+    <string name="processing_done">Апрацоўка зроблена за </string>
+    <string name="language">Мова:</string>
+    <string name="multi_lingual_slow">Шматмоўны, павольны</string>
+    <string name="english_only_fast">Толькі англійскі, хуткі</string>
+    <string name="multi_lingual_fast">Шматмоўны, хуткі</string>
+    <string name="mode_transcription">транскрыпцыя</string>
+    <string name="mode_translation">пераклад</string>
+    <string name="instructions">Націсніце і ўтрымлівайце кнопку мікрафона пакуль кажаце.</string>
+    <string name="update">АБНАВІЦЬ</string>
+    <string name="simple_chinese">Кітайскі (спрошчаны):</string>
+    <string name="text_to_speech">Тэкст-у-гаворку:</string>
+    <string name="tts_language_not_supported">TTS: Мова не падтрымліваецца</string>
+    <string name="tts_initialization_failed">TTS: Збой ініцыялізаціі</string>
+    <string name="auto_button">аўтаматычны рэжым</string>
+    <string name="error_no_input">Не атрымана ўводу голасу</string>
+    <string name="need_record_audio_permission">Дазвол RECORD_AUDIO не дадзены</string>
+    <string name="dialog_StarOnGitHub">Вам падабаецца дадатак? Калі ласка, пастаўце зорку на GitHub або купіце разпрацоўшчыку каву праз PayPal.</string>
+</resources>
