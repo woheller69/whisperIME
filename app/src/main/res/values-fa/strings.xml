@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="text_to_speech">تبدیل متن به گفتار:</string>
+    <string name="voice_input">ورودی صوتی Whisper</string>
+    <string name="need_record_audio_permission">دسترسی ضبط صدا اعطا نشده است</string>
+    <string name="error_download">خطای دانلود</string>
+    <string name="download_model_text">\nدانلود مدل های Whisper از هاگینگ فیس(~435 MB)</string>
+    <string name="select_model">مدل:</string>
+    <string name="status">وضعیت:</string>
+    <string name="append">ضمیمه کردن:</string>
+    <string name="copy_to_clipboard">کپی</string>
+    <string name="processing">در حال پردازش…</string>
+    <string name="dialog_Later_button">شاید بعداً</string>
+    <string name="please_wait">لطفا صبر کنید…</string>
+    <string name="exit_button">خروج</string>
+    <string name="record_button">ضبط</string>
+    <string name="return_button">بازگشت</string>
+    <string name="delete_button">حذف</string>
+    <string name="model_output">خروجی مدل</string>
+    <string name="processing_done">پردازش انجام شد در </string>
+    <string name="language">زبان:</string>
+    <string name="english_only_fast">فقط انگلیسی، سریع</string>
+    <string name="multi_lingual_slow">چندزبانه، آهسته</string>
+    <string name="multi_lingual_fast">چندزبانه، سریع</string>
+    <string name="mode_transcription">رونوشت</string>
+    <string name="mode_translation">ترجمه</string>
+    <string name="update">به‌روزرسانی</string>
+    <string name="simple_chinese">چینی ساده شده:</string>
+    <string name="tts_initialization_failed">TTS: راه‌اندازی ناموفق بود</string>
+    <string name="auto_button">حالت خودکار</string>
+    <string name="error_no_input">ورودی صوتی دریافت نشد</string>
+    <string name="download_model">دانلود مدل</string>
+    <string name="translate">ترجمه به انگلیسی:</string>
+    <string name="dialog_StarOnGitHub">آیا این برنامه را دوست دارید؟ لطفاً در گیت‌هاب یک ستاره بدهید یا از طریق پی‌پال برای توسعه‌دهنده یک قهوه بخرید.</string>
+    <string name="instructions">هنگام صحبت کردن، دکمه میکروفون را فشار داده و نگه دارید.</string>
+    <string name="tts_language_not_supported">TTS: زبان پشتیبانی نمی‌شود</string>
+    <string name="start">شروع</string>
+    <string name="info">اطلاعات</string>
+</resources>
