@@ -25,7 +25,7 @@
         android:largeHeap="true"
         android:theme="@style/Theme.Whisper.NoActionBar">
         <activity android:name="com.whispertflite.MainActivity"
-            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
