@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,10 +26,10 @@ import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 import com.whispertflite.utils.Downloader;
+import com.whispertflite.utils.LanguagePairAdapter;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity {
@@ -67,14 +68,16 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
         sp = PreferenceManager.getDefaultSharedPreferences(this);
 
         spinnerLanguage = findViewById(R.id.spnrLanguage);
-        String[] top40_languages = getResources().getStringArray(R.array.top40_languages);
-        ArrayAdapter<String> lang = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, top40_languages);
-        spinnerLanguage.setAdapter(lang);
+        List<Pair<String, String>> languagePairs = LanguagePairAdapter.getLanguagePairs(this);
+        LanguagePairAdapter languagePairAdapter = new LanguagePairAdapter(this, android.R.layout.simple_spinner_item, languagePairs);
+        languagePairAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerLanguage.setAdapter(languagePairAdapter);
+
         spinnerLanguage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putString("recognitionServiceLanguage",top40_languages[i]);
+                editor.putString("recognitionServiceLanguage",languagePairs.get(i).first);
                 editor.apply();
             }
 
@@ -98,7 +101,7 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
         if (selectedTfliteFile.getName().equals(MULTI_LINGUAL_EU_MODEL_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_SLOW)){
             spinnerLanguage.setEnabled(true);
             String langCode = sp.getString("recognitionServiceLanguage", "auto");
-            spinnerLanguage.setSelection(Arrays.asList(top40_languages).indexOf(langCode));
+            spinnerLanguage.setSelection(languagePairAdapter.getIndexByCode(langCode));
         } else {
             spinnerLanguage.setSelection(0);
             spinnerLanguage.setEnabled(false);
@@ -113,7 +116,7 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
                 if (selectedTfliteFile.getName().equals(MULTI_LINGUAL_EU_MODEL_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_SLOW)){
                     spinnerLanguage.setEnabled(true);
                     String langCode = sp.getString("recognitionServiceLanguage", "auto");
-                    spinnerLanguage.setSelection(Arrays.asList(top40_languages).indexOf(langCode));
+                    spinnerLanguage.setSelection(languagePairAdapter.getIndexByCode(langCode));
                 } else {
                     spinnerLanguage.setSelection(0);
                     spinnerLanguage.setEnabled(false);
