@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="top40_languages">
-        <item>auto</item>
         <item>ar</item>
         <item>bg</item>
         <item>ca</item>
