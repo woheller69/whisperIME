@@ -312,7 +312,7 @@ public class WhisperInputMethodService extends InputMethodService {
                 }
                 boolean commitSuccess = false;
                 if (result.trim().length() > 0) commitSuccess = getCurrentInputConnection().commitText(result.trim() + " ",1);
-                if (modeAuto && commitSuccess) switchToPreviousInputMethod();
+                if (modeAuto && commitSuccess) handler.postDelayed(() -> switchToPreviousInputMethod(), 100); //slightly delayed, otherwise some apps, e.g. WhatsApp, do not accept the committed text (commitText on inactive InputConnection)
             }
         });
     }
