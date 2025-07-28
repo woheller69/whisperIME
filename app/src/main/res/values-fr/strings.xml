@@ -36,4 +36,5 @@
     <string name="tts_initialization_failed">SV: Échec de l\'initialisation</string>
     <string name="auto_button">mode automatique</string>
     <string name="error_no_input">Aucune entrée vocale reçue</string>
+    <string name="auto_lang">Détecter la langue</string>
 </resources>

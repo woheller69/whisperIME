@@ -36,4 +36,5 @@
     <string name="text_to_speech">Szövegből beszéddé alakítás:</string>
     <string name="tts_language_not_supported">TTS: Nem támogatott nyelv</string>
     <string name="tts_initialization_failed">TTS: Az előkészítés sikertelen</string>
+    <string name="auto_lang">Nyelv észlelése</string>
 </resources>
