@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
+import android.media.AudioManager;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
 import android.util.Log;
@@ -160,7 +161,21 @@ public class Recorder {
 
         int bufferSize = AudioRecord.getMinBufferSize(sampleRateInHz, channelConfig, audioFormat);
         if (bufferSize < VAD_FRAME_SIZE * 2) bufferSize = VAD_FRAME_SIZE * 2;
-        AudioRecord audioRecord = new AudioRecord(audioSource, sampleRateInHz, channelConfig, audioFormat, bufferSize);
+
+        AudioManager audioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+        audioManager.startBluetoothSco();
+        audioManager.setBluetoothScoOn(true);
+
+        AudioRecord.Builder builder = new AudioRecord.Builder()
+                .setAudioSource(audioSource)
+                .setAudioFormat(new AudioFormat.Builder()
+                        .setChannelMask(channelConfig)
+                        .setEncoding(audioFormat)
+                        .setSampleRate(sampleRateInHz)
+                        .build())
+                .setBufferSizeInBytes(bufferSize);
+
+        AudioRecord audioRecord = builder.build();
         audioRecord.startRecording();
 
         // Calculate maximum byte counts for 30 seconds (for saving)
@@ -220,6 +235,8 @@ public class Recorder {
         }
         audioRecord.stop();
         audioRecord.release();
+        audioManager.stopBluetoothSco();
+        audioManager.setBluetoothScoOn(false);
 
         // Save recorded audio data to BufferStore (up to 30 seconds)
         RecordBuffer.setOutputBuffer(outputBuffer.toByteArray());
