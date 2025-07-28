@@ -1,0 +1,4 @@
+Bluetooth support
+Improved language selection
+Translations
+Bugfix
