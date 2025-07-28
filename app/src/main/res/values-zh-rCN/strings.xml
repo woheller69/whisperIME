@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="voice_input">Whisper 语音输入</string>
+    <string name="need_record_audio_permission">未授予录制音频权限</string>
+    <string name="error_download">下载错误</string>
+    <string name="download_model">下载模型</string>
+    <string name="download_model_text">\n从 Hugging Face 下载 Whisper 模型(~435 MB)</string>
+    <string name="select_model">模型:</string>
+    <string name="status">状态:</string>
+    <string name="append">附加:</string>
+    <string name="translate">翻译至英文:</string>
+    <string name="copy_to_clipboard">复制</string>
+    <string name="info">信息</string>
+    <string name="processing">处理中…</string>
+    <string name="start">开始</string>
+    <string name="dialog_Later_button">以后再说</string>
+    <string name="please_wait">请稍后…</string>
+    <string name="multi_lingual_fast">多语种，较快</string>
+    <string name="record_button">录制</string>
+    <string name="dialog_StarOnGitHub">您喜欢这个应用吗？请在 GitHub 上给它一个星标，或者通过 PayPal 为开发者买杯咖啡。</string>
+    <string name="exit_button">退出</string>
+    <string name="return_button">返回</string>
+    <string name="delete_button">删除</string>
+    <string name="model_output">模型输出</string>
+    <string name="processing_done">处理完成于 </string>
+    <string name="language">语言:</string>
+    <string name="multi_lingual_slow">多语言，较慢</string>
+    <string name="english_only_fast">仅英语，较快</string>
+    <string name="mode_transcription">转录</string>
+    <string name="mode_translation">翻译</string>
+    <string name="instructions">说话时按住麦克风按钮。</string>
+    <string name="update">更新</string>
+    <string name="simple_chinese">简体中文:</string>
+    <string name="text_to_speech">文本转语音:</string>
+    <string name="tts_language_not_supported">TTS：不支持的语言</string>
+    <string name="tts_initialization_failed">TTS: 初始化失败</string>
+    <string name="auto_button">自动模式</string>
+    <string name="error_no_input">未接受到语音输入</string>
+</resources>
