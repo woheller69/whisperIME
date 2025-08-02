@@ -34,4 +34,5 @@
     <string name="text_to_speech">Text-în-voce:</string>
     <string name="tts_language_not_supported">TTS: Limba nu este acceptată</string>
     <string name="tts_initialization_failed">TTS: Inițializarea eșuată</string>
+    <string name="auto_lang">Detectează limba</string>
 </resources>
