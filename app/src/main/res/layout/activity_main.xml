@@ -1,236 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:fitsSystemWindows="true">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/select_model" />
-
-        <Spinner
-            android:id="@+id/spnrTfliteFiles"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout_language"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/language" />
-
-        <Spinner
-            android:id="@+id/spnrLanguage"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/tvStatusTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/status"
-            android:layout_marginEnd="8dp" />
-
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:layout_marginStart="8dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="16sp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/append" />
-
-        <CheckBox
-            android:id="@+id/mode_append"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:contentDescription="@string/append"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="16sp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/translate" />
-
-        <CheckBox
-            android:id="@+id/mode_translate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:contentDescription="@string/translate"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_tts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:gravity="start">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="16sp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/text_to_speech" />
-
-        <CheckBox
-            android:id="@+id/mode_tts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:contentDescription="@string/text_to_speech"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/layout_mode_chinese"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:gravity="start">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:textSize="16sp"
-            android:textColor="@color/colorAccent"
-            android:text="@string/simple_chinese" />
-
-        <CheckBox
-            android:id="@+id/mode_simple_chinese"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:contentDescription="@string/simple_chinese"/>
-
-    </LinearLayout>
-    <!-- Use ProgressBar as "Space" with same look -->
-    <ProgressBar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="false"
-        android:indeterminateTint="@color/colorAccent"
-        style="?android:attr/progressBarStyleHorizontal"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <ScrollView
-            android:id="@+id/scrollView"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tvResult"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text = "@string/instructions"
-                android:textSize="16sp" />
-        </ScrollView>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabCopy"
-            android:layout_width="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/select_model" />
+
+            <Spinner
+                android:id="@+id/spnrTfliteFiles"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_language"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="3dp"
             android:layout_marginBottom="10dp"
-            android:contentDescription="@string/copy_to_clipboard"
-            android:src="@drawable/ic_copy" />
-    </RelativeLayout>
+            android:orientation="horizontal">
 
-    <ProgressBar
-        android:id="@+id/processing_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="false"
-        android:progressTint="@color/colorAccent"
-        android:indeterminateTint="@color/colorAccent"
-        style="?android:attr/progressBarStyleHorizontal"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/language" />
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-
-        <ImageButton
-            android:id="@+id/btnRecord"
-            android:layout_width="96dp"
+            <Spinner
+                android:id="@+id/spnrLanguage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/rounded_button_background"
-            android:contentDescription="@string/record_button"
-            android:src="@drawable/ic_mic_48dp" />
+            android:layout_marginBottom="6dp"
+            android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btnInfo"
+            <TextView
+                android:id="@+id/tvStatusTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/status"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/append" />
+
+            <CheckBox
+                android:id="@+id/mode_append"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:contentDescription="@string/append"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/translate" />
+
+            <CheckBox
+                android:id="@+id/mode_translate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:contentDescription="@string/translate"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_tts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="start">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/text_to_speech" />
+
+            <CheckBox
+                android:id="@+id/mode_tts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:contentDescription="@string/text_to_speech"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_mode_chinese"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="start">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/simple_chinese" />
+
+            <CheckBox
+                android:id="@+id/mode_simple_chinese"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:contentDescription="@string/simple_chinese"/>
+
+        </LinearLayout>
+        <!-- Use ProgressBar as "Space" with same look -->
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"
+            android:indeterminateTint="@color/colorAccent"
+            style="?android:attr/progressBarStyleHorizontal"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tvResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text = "@string/instructions"
+                    android:textSize="16sp" />
+            </ScrollView>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabCopy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/copy_to_clipboard"
+                android:src="@drawable/ic_copy" />
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/processing_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="false"
+            android:progressTint="@color/colorAccent"
+            android:indeterminateTint="@color/colorAccent"
+            style="?android:attr/progressBarStyleHorizontal"/>
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:background="@null"
-            android:contentDescription="@string/info"
-            android:src="@drawable/ic_info_48dp" />
-    </RelativeLayout>
-</LinearLayout>
+            android:layout_gravity="center_horizontal">
+
+            <ImageButton
+                android:id="@+id/btnRecord"
+                android:layout_width="96dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/rounded_button_background"
+                android:contentDescription="@string/record_button"
+                android:src="@drawable/ic_mic_48dp" />
+
+            <ImageButton
+                android:id="@+id/btnInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="@null"
+                android:contentDescription="@string/info"
+                android:src="@drawable/ic_info_48dp" />
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

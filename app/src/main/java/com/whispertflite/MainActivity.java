@@ -45,10 +45,10 @@ import com.whispertflite.asr.WhisperResult;
 import com.whispertflite.utils.HapticFeedback;
 import com.whispertflite.utils.InputLang;
 import com.whispertflite.utils.LanguagePairAdapter;
+import com.whispertflite.utils.ThemeUtils;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -114,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mContext = this;
         setContentView(R.layout.activity_main);
+        ThemeUtils.setStatusBarAppearance(this);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         checkInputMethodEnabled();
         processingBar = findViewById(R.id.processing_bar);

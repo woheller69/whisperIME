@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace 'com.whispertflite'
-    compileSdk 34
+    compileSdk 35
 
     lintOptions{
         disable 'MissingTranslation'
@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId "org.woheller69.whisper"
         minSdk 28
-        targetSdk 34
+        targetSdk 35
         versionCode 34
         versionName "3.4"
 

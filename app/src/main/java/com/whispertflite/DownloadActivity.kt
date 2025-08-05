@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.whispertflite.databinding.ActivityDownloadBinding
 import com.whispertflite.utils.Downloader
+import com.whispertflite.utils.ThemeUtils
 
 class DownloadActivity  : AppCompatActivity() {
     private var binding: ActivityDownloadBinding? = null
@@ -15,6 +16,7 @@ class DownloadActivity  : AppCompatActivity() {
         binding = ActivityDownloadBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+        ThemeUtils.setStatusBarAppearance(this)
     }
 
     override fun onResume() {

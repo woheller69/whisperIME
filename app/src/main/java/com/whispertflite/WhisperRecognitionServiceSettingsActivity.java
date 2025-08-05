@@ -27,6 +27,7 @@ import androidx.preference.PreferenceManager;
 
 import com.whispertflite.utils.Downloader;
 import com.whispertflite.utils.LanguagePairAdapter;
+import com.whispertflite.utils.ThemeUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class WhisperRecognitionServiceSettingsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognition_service_settings);
-
+        ThemeUtils.setStatusBarAppearance(this);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
