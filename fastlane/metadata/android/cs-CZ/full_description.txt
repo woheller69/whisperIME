@@ -1,0 +1,19 @@
+Whisper je metoda zadávání (IME) s rozpoznáváním hlasu založená na technologii Whisper.
+
+Může fungovat jako samostatná aplikace a zároveň nabízí metodu zadávání, kterou lze aktivovat například
+pomocí tlačítka mikrofonu v klávesnici <a href="https://f-droid.org/packages/helium314.keyboard/">HeliBoard</a>.
+
+Při prvním spuštění je třeba stáhnout modely Whisper ze serveru Hugging Face.
+Toto je jediné využití oprávnění k přístupu na internet.
+
+Rozpoznávání hlasu funguje zcela offline.
+
+Jako samostatná aplikace umí Whisper také překládat jakýkoli podporovaný jazyk do angličtiny.
+
+Jak z Whisperu vytěžit maximum:
+<ul>
+<li>Během mluvení stiskněte a podržte tlačítko</li>
+<li>Než začnete mluvit, krátce se odmlčte</li>
+<li>Mluvte zřetelně, nahlas a mírným tempem</li>
+<li>Upozorňujeme, že každá nahrávka je omezena na 30 sekund</li>
+</ul>
