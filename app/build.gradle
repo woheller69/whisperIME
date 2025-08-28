@@ -15,8 +15,8 @@ android {
         applicationId "org.woheller69.whisper"
         minSdk 28
         targetSdk 35
-        versionCode 34
-        versionName "3.4"
+        versionCode 35
+        versionName "3.5"
 
     }
 
@@ -66,5 +66,5 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite-support:0.4.4'
     implementation 'com.github.gkonovalov.android-vad:webrtc:2.0.9'
     implementation 'com.github.houbb:opencc4j:1.8.1'
-
+    implementation 'com.github.woheller69:FreeDroidWarn:V1.3'
 }
