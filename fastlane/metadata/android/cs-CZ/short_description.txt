@@ -1,0 +1,1 @@
+Rozpoznávání hlasu založené na službě Whisper

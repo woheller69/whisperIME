@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voice_input">Hlasový vstup Whisper</string>
+    <string name="need_record_audio_permission">Oprávnění k nahrávání zvuku nebylo uděleno</string>
+    <string name="error_download">Chyba stahování</string>
+    <string name="download_model">Stáhnout model</string>
+    <string name="download_model_text">\nStáhnout modely Whisper ze serveru Hugging Face (~435 MB)</string>
+    <string name="select_model">Model:</string>
+    <string name="status">Stav:</string>
+    <string name="append">Připojit:</string>
+    <string name="translate">Přeložit do angličtiny:</string>
+    <string name="copy_to_clipboard">Kopírovat</string>
+    <string name="info">Informace</string>
+    <string name="processing">Zpracování…</string>
+    <string name="start">SPUSTIT</string>
+    <string name="dialog_StarOnGitHub">Líbí se vám tato aplikace? Udělte jí prosím hvězdičku na GitHubu nebo kupte vývojáři kávu skrze PayPal.</string>
+    <string name="dialog_Later_button">Možná později</string>
+    <string name="please_wait">Čekejte prosím…</string>
+    <string name="exit_button">Ukončit</string>
+    <string name="record_button">Nahrát</string>
+    <string name="return_button">Vrátit</string>
+    <string name="delete_button">Odstranit</string>
+    <string name="model_output">Výstup modelu</string>
+    <string name="processing_done">Zpracování hotovo za </string>
+    <string name="language">Jazyk:</string>
+    <string name="multi_lingual_slow">Vícejazyčný, pomalý</string>
+    <string name="english_only_fast">Pouze angličtina, rychlý</string>
+    <string name="multi_lingual_fast">Výcejazyčný, rychlý</string>
+    <string name="mode_transcription">přepis</string>
+    <string name="mode_translation">překlad</string>
+    <string name="instructions">Stiskněte a držte tlačítko mikrofonu během mluvení.</string>
+    <string name="update">AKTUALIZOVAT</string>
+    <string name="simple_chinese">Zjednodušená čínština:</string>
+    <string name="text_to_speech">Text na řeč:</string>
+    <string name="tts_language_not_supported">TTS: Jazyk není podporován</string>
+    <string name="tts_initialization_failed">TTS: Inicializace selhala</string>
+    <string name="auto_button">automatický režim</string>
+    <string name="error_no_input">Nebyl obdržen žádný hlasový vstup</string>
+    <string name="auto_lang">Zjistit jazyk</string>
+</resources>

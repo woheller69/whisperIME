@@ -37,4 +37,5 @@
     <string name="tts_language_not_supported">TTS: Язык не поддерживается</string>
     <string name="voice_input">Источник голоса для Whisper</string>
     <string name="instructions">Нажмите и удерживайте микрофон пока говорите.</string>
+    <string name="auto_lang">Определить язык</string>
 </resources>

@@ -1,3 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="error_download">Errore di download</string>
+    <string name="download_model">Scarica il modello</string>
+    <string name="english_only_fast">Solo in inglese, più rapido</string>
+    <string name="update">AGGIORNAMENTO</string>
+    <string name="error_no_input">Nessun input vocale ricevuto</string>
+    <string name="auto_lang">Indovina la lingua</string>
+    <string name="need_record_audio_permission">L\'autorizzazione RECORD_AUDIO non è concessa</string>
+    <string name="processing">Elaborazione in corso…</string>
+    <string name="mode_transcription">trascrizione</string>
+    <string name="tts_language_not_supported">TTS: lingua non supportata</string>
+    <string name="auto_button">modo automatico</string>
+    <string name="multi_lingual_fast">Multilingua, veloce</string>
+    <string name="mode_translation">traduzione</string>
+    <string name="instructions">Tenere premuto il pulsante del microfono mentre si parla.</string>
+    <string name="simple_chinese">Cinese semplificato:</string>
+    <string name="text_to_speech">Sintesi vocale:</string>
+    <string name="tts_initialization_failed">TTS: Inizializzazione fallita</string>
+    <string name="append">Aggiungi:</string>
+    <string name="translate">Traduci in inglese:</string>
+    <string name="copy_to_clipboard">Copia</string>
+    <string name="info">Informazioni</string>
+    <string name="start">Inizio</string>
+    <string name="dialog_StarOnGitHub">Ti piace questa app? Lascia una stella su GitHub o offri un caffè allo sviluppatore tramite PayPal.</string>
+    <string name="dialog_Later_button">Forse più tardi</string>
+    <string name="please_wait">Attendere prego…</string>
+    <string name="exit_button">Uscita</string>
+    <string name="record_button">Registrazione</string>
+    <string name="return_button">Indietro</string>
+    <string name="delete_button">Cancella</string>
+    <string name="model_output">Risultato del modello</string>
+    <string name="processing_done">Elaborazione effettuata in </string>
+    <string name="language">Lingua:</string>
+    <string name="multi_lingual_slow">Multilingua, più lento</string>
+    <string name="voice_input">Input vocale Whisper</string>
+    <string name="download_model_text">\nScarica il modello Whisper da Hugging Face (~435 MB)</string>
+    <string name="select_model">Modello:</string>
+    <string name="status">Stato:</string>
 </resources>
