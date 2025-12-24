@@ -36,4 +36,5 @@
     <string name="tts_initialization_failed">TTS: 初始化失败</string>
     <string name="auto_button">自动模式</string>
     <string name="error_no_input">未接受到语音输入</string>
+    <string name="auto_lang">检测语言</string>
 </resources>
