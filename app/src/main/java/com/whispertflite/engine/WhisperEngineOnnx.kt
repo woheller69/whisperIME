@@ -38,21 +38,32 @@ class WhisperEngineOnnx(private val context: Context) : WhisperEngine {
         encoder: String, decoder: String, tokens: String,
         language: String, task: String, numThreads: Int,
     ): OfflineRecognizer {
-        val config = OfflineRecognizerConfig(
-            modelConfig = OfflineModelConfig(
-                whisper = OfflineWhisperModelConfig(
-                    encoder = encoder,
-                    decoder = decoder,
-                    language = language,
-                    task = task,
-                ),
-                tokens = tokens,
-                numThreads = numThreads,
-                modelType = "whisper",
-            ),
-            decodingMethod = "greedy_search",
-        )
-        return OfflineRecognizer(config = config)
+        // Try hardware accelerators in order; fall back to CPU if unavailable
+        for (provider in listOf("nnapi", "gpu", "cpu")) {
+            try {
+                val config = OfflineRecognizerConfig(
+                    modelConfig = OfflineModelConfig(
+                        whisper = OfflineWhisperModelConfig(
+                            encoder = encoder,
+                            decoder = decoder,
+                            language = language,
+                            task = task,
+                        ),
+                        tokens = tokens,
+                        numThreads = numThreads,
+                        modelType = "whisper",
+                        provider = provider,
+                    ),
+                    decodingMethod = "greedy_search",
+                )
+                val recognizer = OfflineRecognizer(config = config)
+                Log.i(tag, "Inference provider: $provider")
+                return recognizer
+            } catch (e: Exception) {
+                Log.w(tag, "Provider '$provider' unavailable: ${e.message}")
+            }
+        }
+        throw IOException("No suitable inference provider found (nnapi/gpu/cpu all failed)")
     }
 
     override fun deinitialize() {
