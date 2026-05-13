@@ -72,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String ENGLISH_ONLY_VOCAB_FILE = "filters_vocab_en.bin";
     public static final String MULTILINGUAL_VOCAB_FILE = "filters_vocab_multilingual.bin";
 
+    // Breeze-ASR-26 ONNX model (encoder is the representative file for the spinner)
+    public static final String BREEZE_ASR_MODEL = "breeze-asr-26-encoder.int8.onnx";
+    public static final String BREEZE_ASR_TOKENS = "breeze-asr-26-tokens.txt";
+    public static final String BREEZE_ASR_ENCODER_SUFFIX = "-encoder.int8.onnx";
+
 
     private TextView tvStatus;
     private EditText tvResult;
@@ -157,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         // Call the method to copy specific file types from assets to data folder
         sdcardDataFolder = this.getExternalFilesDir(null);
 
-        ArrayList<File> tfliteFiles = getFilesWithExtension(sdcardDataFolder, ".tflite");
+        ArrayList<File> tfliteFiles = getModelFiles(sdcardDataFolder);
 
         // Initialize default model to use
         initModel();
@@ -192,14 +197,7 @@ public class MainActivity extends AppCompatActivity {
         spinnerTflite = findViewById(R.id.spnrTfliteFiles);
         spinnerTflite.setAdapter(tfliteAdapter);
         spinnerTflite.setSelection(position,false);
-        if (selectedTfliteFile.getName().equals(MULTI_LINGUAL_EU_MODEL_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_SLOW)){
-            spinnerLanguage.setEnabled(true);
-            String langCode = sp.getString("language", "auto");
-            spinnerLanguage.setSelection(languagePairAdapter.getIndexByCode(langCode));
-        } else {
-            spinnerLanguage.setSelection(0);
-            spinnerLanguage.setEnabled(false);
-        }
+        updateLanguageSpinner(selectedTfliteFile, languagePairAdapter);
         spinnerTflite.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -209,14 +207,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putString("modelName",selectedTfliteFile.getName());
                 editor.apply();
                 initModel();
-                if (selectedTfliteFile.getName().equals(MULTI_LINGUAL_EU_MODEL_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_FAST) || selectedTfliteFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_SLOW)){
-                    spinnerLanguage.setEnabled(true);
-                    String langCode = sp.getString("language", "auto");
-                    spinnerLanguage.setSelection(languagePairAdapter.getIndexByCode(langCode));
-                } else {
-                    spinnerLanguage.setSelection(0);
-                    spinnerLanguage.setEnabled(false);
-                }
+                updateLanguageSpinner(selectedTfliteFile, languagePairAdapter);
             }
 
             @Override
@@ -347,9 +338,17 @@ public class MainActivity extends AppCompatActivity {
     // Model initialization
     private void initModel() {
         File modelFile = new File(sdcardDataFolder, sp.getString("modelName", MULTI_LINGUAL_TOP_WORLD_SLOW));
-        boolean isMultilingualModel = !(modelFile.getName().endsWith(ENGLISH_ONLY_MODEL_EXTENSION));
-        String vocabFileName = isMultilingualModel ? MULTILINGUAL_VOCAB_FILE : ENGLISH_ONLY_VOCAB_FILE;
-        File vocabFile = new File(sdcardDataFolder, vocabFileName);
+        File vocabFile;
+        boolean isMultilingualModel;
+        if (modelFile.getName().endsWith(BREEZE_ASR_ENCODER_SUFFIX)) {
+            // Breeze-ASR ONNX: vocabFile is the tokens.txt
+            vocabFile = new File(sdcardDataFolder, BREEZE_ASR_TOKENS);
+            isMultilingualModel = true;
+        } else {
+            isMultilingualModel = !(modelFile.getName().endsWith(ENGLISH_ONLY_MODEL_EXTENSION));
+            String vocabFileName = isMultilingualModel ? MULTILINGUAL_VOCAB_FILE : ENGLISH_ONLY_VOCAB_FILE;
+            vocabFile = new File(sdcardDataFolder, vocabFileName);
+        }
 
         mWhisper = new Whisper(this);
         mWhisper.loadModel(modelFile, vocabFile, isMultilingualModel);
@@ -408,45 +407,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 View view = super.getView(position, convertView, parent);
-                TextView textView = view.findViewById(android.R.id.text1);
-                if ((getItem(position).getName()).equals(MULTI_LINGUAL_MODEL_SLOW))
-                    textView.setText(R.string.multi_lingual_slow);
-                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_TOP_WORLD_SLOW))
-                    textView.setText(R.string.multi_lingual_slow);
-                else if ((getItem(position).getName()).equals(ENGLISH_ONLY_MODEL))
-                    textView.setText(R.string.english_only_fast);
-                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_MODEL_FAST))
-                    textView.setText(R.string.multi_lingual_fast);
-                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_EU_MODEL_FAST))
-                    textView.setText(R.string.multi_lingual_fast);
-                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_TOP_WORLD_FAST))
-                    textView.setText(R.string.multi_lingual_fast);
-                else
-                    textView.setText(getItem(position).getName().substring(0, getItem(position).getName().length() - ".tflite".length()));
-
+                setModelLabel(view, getItem(position));
                 return view;
             }
 
             @Override
             public View getDropDownView(int position, View convertView, ViewGroup parent) {
                 View view = super.getDropDownView(position, convertView, parent);
-                TextView textView = view.findViewById(android.R.id.text1);
-                if ((getItem(position).getName()).equals(MULTI_LINGUAL_MODEL_SLOW))
-                    textView.setText(R.string.multi_lingual_slow);
-                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_TOP_WORLD_SLOW))
-                    textView.setText(R.string.multi_lingual_slow);
-                else if ((getItem(position).getName()).equals(ENGLISH_ONLY_MODEL))
-                    textView.setText(R.string.english_only_fast);
-                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_MODEL_FAST))
-                    textView.setText(R.string.multi_lingual_fast);
-                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_EU_MODEL_FAST))
-                    textView.setText(R.string.multi_lingual_fast);
-                else if ((getItem(position).getName()).equals(MULTI_LINGUAL_TOP_WORLD_FAST))
-                    textView.setText(R.string.multi_lingual_fast);
-                else
-                    textView.setText(getItem(position).getName().substring(0, getItem(position).getName().length() - ".tflite".length()));
-
+                setModelLabel(view, getItem(position));
                 return view;
+            }
+
+            private void setModelLabel(View view, File item) {
+                TextView textView = view.findViewById(android.R.id.text1);
+                String name = item.getName();
+                if (name.equals(MULTI_LINGUAL_MODEL_SLOW) || name.equals(MULTI_LINGUAL_TOP_WORLD_SLOW))
+                    textView.setText(R.string.multi_lingual_slow);
+                else if (name.equals(ENGLISH_ONLY_MODEL))
+                    textView.setText(R.string.english_only_fast);
+                else if (name.equals(MULTI_LINGUAL_MODEL_FAST) || name.equals(MULTI_LINGUAL_EU_MODEL_FAST) || name.equals(MULTI_LINGUAL_TOP_WORLD_FAST))
+                    textView.setText(R.string.multi_lingual_fast);
+                else if (name.endsWith(BREEZE_ASR_ENCODER_SUFFIX))
+                    textView.setText(R.string.breeze_asr);
+                else if (name.endsWith(".tflite"))
+                    textView.setText(name.substring(0, name.length() - ".tflite".length()));
+                else
+                    textView.setText(name);
             }
         };
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -522,6 +508,41 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return filteredFiles;
+    }
+
+    // Returns both TFLite model files and Breeze-ASR ONNX encoder files
+    public ArrayList<File> getModelFiles(File directory) {
+        ArrayList<File> files = getFilesWithExtension(directory, ".tflite");
+        if (directory != null && directory.exists()) {
+            File[] allFiles = directory.listFiles();
+            if (allFiles != null) {
+                for (File f : allFiles) {
+                    if (f.isFile() && f.getName().endsWith(BREEZE_ASR_ENCODER_SUFFIX)) {
+                        files.add(f);
+                    }
+                }
+            }
+        }
+        return files;
+    }
+
+    private void updateLanguageSpinner(File modelFile, LanguagePairAdapter adapter) {
+        boolean isBreezeAsr = modelFile.getName().endsWith(BREEZE_ASR_ENCODER_SUFFIX);
+        boolean isMultiLingualWhisper = modelFile.getName().equals(MULTI_LINGUAL_EU_MODEL_FAST)
+                || modelFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_FAST)
+                || modelFile.getName().equals(MULTI_LINGUAL_TOP_WORLD_SLOW);
+        if (isMultiLingualWhisper) {
+            spinnerLanguage.setEnabled(true);
+            String langCode = sp.getString("language", "auto");
+            spinnerLanguage.setSelection(adapter.getIndexByCode(langCode));
+        } else if (isBreezeAsr) {
+            // Breeze-ASR is Chinese-only; fix language to zh
+            spinnerLanguage.setEnabled(false);
+            spinnerLanguage.setSelection(adapter.getIndexByCode("zh"));
+        } else {
+            spinnerLanguage.setSelection(0);
+            spinnerLanguage.setEnabled(false);
+        }
     }
 
 }

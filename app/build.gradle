@@ -67,4 +67,7 @@ dependencies {
     implementation 'com.github.gkonovalov.android-vad:webrtc:2.0.9'
     implementation 'com.github.houbb:opencc4j:1.8.1'
     implementation 'com.github.woheller69:FreeDroidWarn:+'
+
+    // Sherpa-ONNX for Breeze-ASR inference
+    implementation 'com.k2fsa.sherpa.onnx:sherpa-onnx:1.12.40'
 }

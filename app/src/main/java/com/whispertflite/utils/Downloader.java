@@ -39,6 +39,15 @@ public class Downloader {
     static final String modelMultiLingualBaseURL = "https://huggingface.co/DocWolle/whisper_tflite_models/resolve/main/whisper-base.TOP_WORLD.tflite";
     static final String modelMultiLingualSmallURL = "https://huggingface.co/DocWolle/whisper_tflite_models/resolve/main/whisper-small.TOP_WORLD.tflite";
     static final String modelEnglishOnlyURL = "https://huggingface.co/DocWolle/whisper_tflite_models/resolve/main/whisper-tiny.en.tflite";
+
+    // Breeze-ASR-26 ONNX model files (encoder + decoder + tokens)
+    static final String modelBreezeAsrEncoder = "breeze-asr-26-encoder.int8.onnx";
+    static final String modelBreezeAsrDecoder = "breeze-asr-26-decoder.int8.onnx";
+    static final String modelBreezeAsrTokens = "breeze-asr-26-tokens.txt";
+    static final String modelBreezeAsrEncoderURL = "https://huggingface.co/MediaTek-Research/Breeze-ASR-26/resolve/main/breeze-asr-26-encoder.int8.onnx";
+    static final String modelBreezeAsrDecoderURL = "https://huggingface.co/MediaTek-Research/Breeze-ASR-26/resolve/main/breeze-asr-26-decoder.int8.onnx";
+    static final String modelBreezeAsrTokensURL = "https://huggingface.co/MediaTek-Research/Breeze-ASR-26/resolve/main/breeze-asr-26-tokens.txt";
+    static boolean modelBreezeAsrFinished = false;
     static final String modelMultiLingualBaseOLDMD5 = "4b4fddfac6a24ffecc4972bc2137ba04";
     static final String modelMultiLingualBaseOLD2MD5 = "82adc0d42761f6d83fecd76d0325bcf5";
     static final String modelMultiLingualBaseMD5 = "9e43f385a916ac4b2e48760ce1fa70fc";
@@ -373,6 +382,56 @@ public class Downloader {
             });
         }
 
+        // Download Breeze-ASR-26 ONNX files (optional; does not block the Start button)
+        downloadBreezeAsrFiles(activity);
+    }
+
+    private static void downloadBreezeAsrFiles(final Activity activity) {
+        File encoderFile = new File(activity.getExternalFilesDir(null) + "/" + modelBreezeAsrEncoder);
+        File decoderFile = new File(activity.getExternalFilesDir(null) + "/" + modelBreezeAsrDecoder);
+        File tokensFile  = new File(activity.getExternalFilesDir(null) + "/" + modelBreezeAsrTokens);
+
+        if (encoderFile.exists() && decoderFile.exists() && tokensFile.exists()) {
+            modelBreezeAsrFinished = true;
+            return;
+        }
+        modelBreezeAsrFinished = false;
+
+        String[][] files = {
+            {modelBreezeAsrEncoderURL, encoderFile.getAbsolutePath()},
+            {modelBreezeAsrDecoderURL, decoderFile.getAbsolutePath()},
+            {modelBreezeAsrTokensURL,  tokensFile.getAbsolutePath()},
+        };
+
+        for (String[] entry : files) {
+            String fileUrl  = entry[0];
+            String filePath = entry[1];
+            File   target   = new File(filePath);
+            if (target.exists()) continue;
+
+            Thread thread = new Thread(() -> {
+                try {
+                    URLConnection ucon = new URL(fileUrl).openConnection();
+                    ucon.setReadTimeout(5000);
+                    ucon.setConnectTimeout(10000);
+                    target.createNewFile();
+                    try (InputStream is = new BufferedInputStream(ucon.getInputStream(), 1024 * 5);
+                         FileOutputStream out = new FileOutputStream(target)) {
+                        byte[] buf = new byte[5 * 1024];
+                        int len;
+                        while ((len = is.read(buf)) != -1) out.write(buf, 0, len);
+                    }
+                    Log.d("WhisperASR", "Downloaded Breeze-ASR file: " + target.getName());
+                    if (encoderFile.exists() && decoderFile.exists() && tokensFile.exists()) {
+                        modelBreezeAsrFinished = true;
+                    }
+                } catch (IOException e) {
+                    target.delete();
+                    Log.w("WhisperASR", "Failed to download Breeze-ASR file: " + target.getName(), e);
+                }
+            });
+            thread.start();
+        }
     }
 
     public static String calculateMD5(String filePath) throws IOException, NoSuchAlgorithmException {

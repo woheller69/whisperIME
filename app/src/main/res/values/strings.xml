@@ -38,4 +38,5 @@
     <string name="auto_button">automatic mode</string>
     <string name="error_no_input">No voice input received</string>
     <string name="auto_lang">Detect language</string>
+    <string name="breeze_asr">Breeze-ASR (Chinese)</string>
 </resources>

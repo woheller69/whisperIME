@@ -3,6 +3,8 @@ package com.whispertflite;
 import static android.speech.SpeechRecognizer.ERROR_CLIENT;
 import static android.speech.SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS;
 import static android.speech.SpeechRecognizer.ERROR_LANGUAGE_UNAVAILABLE;
+import static com.whispertflite.MainActivity.BREEZE_ASR_ENCODER_SUFFIX;
+import static com.whispertflite.MainActivity.BREEZE_ASR_TOKENS;
 import static com.whispertflite.MainActivity.ENGLISH_ONLY_MODEL_EXTENSION;
 import static com.whispertflite.MainActivity.ENGLISH_ONLY_VOCAB_FILE;
 import static com.whispertflite.MainActivity.MULTILINGUAL_VOCAB_FILE;
@@ -138,9 +140,16 @@ public class WhisperRecognitionService extends RecognitionService {
 
     // Model initialization
     private void initModel(File modelFile, Callback callback, int langToken) {
-        boolean isMultilingualModel = !(modelFile.getName().endsWith(ENGLISH_ONLY_MODEL_EXTENSION));
-        String vocabFileName = isMultilingualModel ? MULTILINGUAL_VOCAB_FILE : ENGLISH_ONLY_VOCAB_FILE;
-        File vocabFile = new File(sdcardDataFolder, vocabFileName);
+        File vocabFile;
+        boolean isMultilingualModel;
+        if (modelFile.getName().endsWith(BREEZE_ASR_ENCODER_SUFFIX)) {
+            vocabFile = new File(sdcardDataFolder, BREEZE_ASR_TOKENS);
+            isMultilingualModel = true;
+        } else {
+            isMultilingualModel = !(modelFile.getName().endsWith(ENGLISH_ONLY_MODEL_EXTENSION));
+            String vocabFileName = isMultilingualModel ? MULTILINGUAL_VOCAB_FILE : ENGLISH_ONLY_VOCAB_FILE;
+            vocabFile = new File(sdcardDataFolder, vocabFileName);
+        }
 
         mWhisper = new Whisper(this);
         mWhisper.loadModel(modelFile, vocabFile, isMultilingualModel);
