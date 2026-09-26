@@ -32,7 +32,7 @@
     <string name="download_model">دانلود مدل</string>
     <string name="translate">ترجمه به انگلیسی:</string>
     <string name="dialog_StarOnGitHub">آیا این برنامه را دوست دارید؟ لطفاً در گیت‌هاب یک ستاره بدهید یا از طریق پی‌پال برای توسعه‌دهنده یک قهوه بخرید.</string>
-    <string name="instructions">هنگام صحبت کردن، دکمه میکروفون را فشار داده و نگه دارید.</string>
+    <string name="instructions">برای شروع و توقف ضبط روی دکمه میکروفون ضربه بزنید، یا هنگام صحبت کردن آن را فشار داده و نگه دارید.</string>
     <string name="tts_language_not_supported">TTS: زبان پشتیبانی نمی‌شود</string>
     <string name="start">شروع</string>
     <string name="info">اطلاعات</string>

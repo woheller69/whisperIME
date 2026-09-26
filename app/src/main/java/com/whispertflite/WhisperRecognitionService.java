@@ -218,7 +218,7 @@ public class WhisperRecognitionService extends RecognitionService {
                 toast.show();
             });
             mWhisper.setAction(Whisper.ACTION_TRANSCRIBE);
-            mWhisper.start();
+            mWhisper.start(mRecorder.getRecordedAudio());
             Log.d(TAG,"Start Transcription");
         }
     }

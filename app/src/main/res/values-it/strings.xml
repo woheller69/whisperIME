@@ -13,7 +13,7 @@
     <string name="auto_button">modo automatico</string>
     <string name="multi_lingual_fast">Multilingua, veloce</string>
     <string name="mode_translation">traduzione</string>
-    <string name="instructions">Tenere premuto il pulsante del microfono mentre si parla.</string>
+    <string name="instructions">Tocca il pulsante del microfono per avviare e fermare la registrazione, oppure tienilo premuto mentre parli.</string>
     <string name="simple_chinese">Cinese semplificato:</string>
     <string name="text_to_speech">Sintesi vocale:</string>
     <string name="tts_initialization_failed">TTS: Inizializzazione fallita</string>
@@ -37,4 +37,28 @@
     <string name="download_model_text">\nScarica il modello Whisper da Hugging Face (~435 MB)</string>
     <string name="select_model">Modello:</string>
     <string name="status">Stato:</string>
+    <string name="overlay_service_label">Microfono flottante Whisper</string>
+    <string name="overlay_accessibility_description">Mostra un pulsante microfono flottante quando scrivi. Toccalo per dettare con Whisper e inserire il testo nel campo attivo senza cambiare tastiera. L\'audio viene elaborato solo sul dispositivo. Il permesso di accessibilità serve solo a trovare il campo di testo attivo e inserire la trascrizione.</string>
+    <string name="overlay_bubble_description">Avvia dettatura Whisper</string>
+    <string name="overlay_cancel">Annulla</string>
+    <string name="overlay_insert">Inserisci testo</string>
+    <string name="overlay_listening">In ascolto… %1$s</string>
+    <string name="overlay_transcribing">Trascrizione…</string>
+    <string name="overlay_loading_model">Caricamento modello…</string>
+    <string name="overlay_ready">Tocca l\'onda per continuare a parlare</string>
+    <string name="overlay_hint_speak">Parla ora…</string>
+    <string name="overlay_no_model">Scarica prima un modello Whisper</string>
+    <string name="overlay_copied">Nessun campo di testo trovato – copiato negli appunti</string>
+    <string name="overlay_enable">Microfono flottante:</string>
+    <string name="custom_vocabulary_button">Parole personalizzate…</string>
+    <string name="custom_vocabulary_title">Parole personalizzate</string>
+    <string name="custom_vocabulary_help">Una voce per riga.\n• Una parola o un nome di almeno 5 lettere, o una sigla (es. Elena, GPT): le parole simili nel suono vengono corrette (Helena → Elena, GPD → GPT). Le parole più corte correggono solo maiuscole/minuscole.\n• sbagliato = giusto (es. cloud code = Claude Code): sostituzione esplicita.</string>
+    <string name="custom_vocabulary_reset">Ripristina</string>
+    <string name="overlay_transcribing_progress">Trascrizione… %1$d/%2$d</string>
+    <string name="overlay_cancel_recording">Annulla registrazione</string>
+    <string name="overlay_cancel_transcription">Annulla trascrizione</string>
+    <string name="overlay_close">Chiudi e scarta</string>
+    <string name="overlay_move">Trascina per spostare</string>
+    <string name="overlay_recording_discarded">Registrazione scartata</string>
+    <string name="overlay_transcription_cancelled">Trascrizione annullata</string>
 </resources>

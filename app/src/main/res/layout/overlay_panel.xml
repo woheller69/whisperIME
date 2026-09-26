@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Padding leaves room for the elevation shadow -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:id="@+id/overlay_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:elevation="12dp"
+        android:background="@drawable/overlay_panel_bg"
+        android:paddingStart="28dp"
+        android:paddingEnd="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp">
+
+        <!-- Drag handle: moves the panel (the whole top area is the touch target) -->
+        <FrameLayout
+            android:id="@+id/overlay_drag_handle"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginStart="-8dp"
+            android:contentDescription="@string/overlay_move">
+
+            <View
+                android:layout_width="40dp"
+                android:layout_height="4dp"
+                android:layout_gravity="center"
+                android:background="@drawable/overlay_drag_pill" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/overlay_status_dot"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/overlay_status_dot"
+                android:backgroundTint="@color/overlayRecording" />
+
+            <TextView
+                android:id="@+id/overlay_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/overlayCreamDim" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/overlay_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="8"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="true"
+            android:lineSpacingExtra="4dp"
+            android:textSize="20sp"
+            android:textColor="@color/overlayCream"
+            android:textColorHint="@color/overlayCreamDim" />
+
+        <!-- Explicit cancel actions, only visible while there is something to cancel -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/overlay_cancel_recording"
+                style="@style/OverlayChip"
+                android:text="@string/overlay_cancel_recording"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/overlay_cancel_transcription"
+                style="@style/OverlayChip"
+                android:layout_marginTop="8dp"
+                android:text="@string/overlay_cancel_transcription"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="end|center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/overlay_cancel"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/overlay_circle_lilac"
+                android:src="@drawable/ic_close_24dp"
+                android:tint="@color/overlayOnButton"
+                android:contentDescription="@string/overlay_close" />
+
+            <FrameLayout
+                android:id="@+id/overlay_wave_button"
+                android:layout_width="112dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="8dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="14dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/overlay_pill_lilac"
+                android:contentDescription="@string/record_button">
+
+                <com.whispertflite.overlay.WaveformView
+                    android:id="@+id/overlay_waveform"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </FrameLayout>
+
+            <ImageButton
+                android:id="@+id/overlay_done"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/overlay_circle_cream"
+                android:src="@drawable/ic_check_24dp"
+                android:tint="@color/overlayOnButton"
+                android:contentDescription="@string/overlay_insert" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

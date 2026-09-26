@@ -28,7 +28,7 @@
     <string name="multi_lingual_fast">Mehrsprachig, schnell</string>
     <string name="mode_transcription">Transkription</string>
     <string name="mode_translation">Übersetzung</string>
-    <string name="instructions">Halten Sie die Mikrofontaste gedrückt während Sie sprechen.</string>
+    <string name="instructions">Tippen Sie auf die Mikrofontaste, um die Aufnahme zu starten und zu beenden, oder halten Sie sie gedrückt, während Sie sprechen.</string>
     <string name="simple_chinese">Vereinfachtes Chinesisch:</string>
     <string name="text_to_speech">Sprachausgabe:</string>
     <string name="tts_language_not_supported">Sprachausgabe: Sprache nicht unterstützt</string>

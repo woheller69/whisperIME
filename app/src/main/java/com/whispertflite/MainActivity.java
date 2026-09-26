@@ -11,14 +11,12 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.util.Pair;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodInfo;
@@ -44,9 +42,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.whispertflite.asr.Recorder;
 import com.whispertflite.asr.Whisper;
 import com.whispertflite.asr.WhisperResult;
+import com.whispertflite.utils.CustomVocabulary;
 import com.whispertflite.utils.HapticFeedback;
 import com.whispertflite.utils.InputLang;
 import com.whispertflite.utils.LanguagePairAdapter;
+import com.whispertflite.utils.RecordingCountdown;
+import com.whispertflite.utils.TapOrHoldRecordListener;
 import com.whispertflite.utils.ThemeUtils;
 
 import org.woheller69.freeDroidWarn.FreeDroidWarn;
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox modeTTS;
     private ProgressBar processingBar;
     private ImageButton btnInfo;
+    private CheckBox modeOverlay;
 
     private Recorder mRecorder = null;
     private Whisper mWhisper = null;
@@ -93,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     private File selectedTfliteFile = null;
     private SharedPreferences sp = null;
     private Spinner spinnerTflite;
-    private CountDownTimer countDownTimer;
+    private RecordingCountdown countDownTimer;
     private Spinner spinnerLanguage;
     private int langToken = -1;
     private long startTime = 0;
@@ -162,6 +164,15 @@ public class MainActivity extends AppCompatActivity {
         // Initialize default model to use
         initModel();
 
+        modeOverlay = findViewById(R.id.mode_overlay);
+        // The floating mic is an accessibility service, it can only be switched on/off in system settings
+        modeOverlay.setOnClickListener(v -> {
+            modeOverlay.setChecked(isOverlayServiceEnabled());
+            startActivity(new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS));
+        });
+
+        findViewById(R.id.btnCustomVocabulary).setOnClickListener(v -> showCustomVocabularyDialog());
+
         btnInfo = findViewById(R.id.btnInfo);
         btnInfo.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/woheller69/whisperIME#Donate"))));
 
@@ -229,35 +240,36 @@ public class MainActivity extends AppCompatActivity {
         // Implementation of record button functionality
         btnRecord = findViewById(R.id.btnRecord);
 
-        btnRecord.setOnTouchListener((v, event) -> {
-            if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                // Pressed
-                runOnUiThread(() -> btnRecord.setBackgroundResource(R.drawable.rounded_button_background_pressed));
+        TapOrHoldRecordListener.attach(btnRecord, new TapOrHoldRecordListener.Callback() {
+            @Override
+            public boolean onStartRecording() {
                 Log.d(TAG, "Start recording...");
-                if (!mWhisper.isInProgress()) {
-                    HapticFeedback.vibrate(this);
-                    startRecording();
-                    runOnUiThread(() -> processingBar.setProgress(100));
-                    countDownTimer = new CountDownTimer(30000, 1000) {
-                        @Override
-                        public void onTick(long l) {
-                            runOnUiThread(() -> processingBar.setProgress((int) (l / 300)));
-                        }
-                        @Override
-                        public void onFinish() {}
-                    };
-                    countDownTimer.start();
-                } else (Toast.makeText(this,getString(R.string.please_wait),Toast.LENGTH_SHORT)).show();
+                if (mWhisper == null || mWhisper.isInProgress()) {
+                    (Toast.makeText(mContext, getString(R.string.please_wait), Toast.LENGTH_SHORT)).show();
+                    return false;
+                }
+                runOnUiThread(() -> btnRecord.setBackgroundResource(R.drawable.rounded_button_background_pressed));
+                HapticFeedback.vibrate(mContext);
+                startRecording();
+                if (countDownTimer != null) countDownTimer.cancel();
+                countDownTimer = new RecordingCountdown(processingBar);
+                countDownTimer.start();
+                return true;
+            }
 
-            } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                // Released
+            @Override
+            public void onStopRecording() {
                 runOnUiThread(() -> btnRecord.setBackgroundResource(R.drawable.rounded_button_background));
                 if (mRecorder != null && mRecorder.isInProgress()) {
                     Log.d(TAG, "Recording is in progress... stopping...");
                     stopRecording();
                 }
             }
-            return true;
+
+            @Override
+            public boolean isRecording() {
+                return mRecorder != null && mRecorder.isInProgress();
+            }
         });
 
         layoutModeChinese = findViewById(R.id.layout_mode_chinese);
@@ -309,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
                     else startProcessing(Whisper.ACTION_TRANSCRIBE);
                 } else if (message.equals(Recorder.MSG_RECORDING_ERROR)) {
                     HapticFeedback.vibrate(mContext);
-                    if (countDownTimer!=null) { countDownTimer.cancel();}
+                    if (countDownTimer!=null) countDownTimer.cancel();
                     runOnUiThread(() -> {
                         btnRecord.setBackgroundResource(R.drawable.rounded_button_background);
                         processingBar.setProgress(0);
@@ -324,6 +336,44 @@ public class MainActivity extends AppCompatActivity {
         // Assume this Activity is the current activity, check record permission
         checkPermissions();
 
+    }
+
+    private void showCustomVocabularyDialog() {
+        EditText input = new EditText(this);
+        input.setText(CustomVocabulary.getVocabulary(this));
+        input.setMinLines(6);
+        input.setGravity(android.view.Gravity.TOP | android.view.Gravity.START);
+        input.setInputType(android.text.InputType.TYPE_CLASS_TEXT | android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE
+                | android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        int pad = Math.round(20 * getResources().getDisplayMetrics().density);
+        LinearLayout container = new LinearLayout(this);
+        container.setPadding(pad, 0, pad, 0);
+        container.addView(input, new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle(R.string.custom_vocabulary_title)
+                .setMessage(R.string.custom_vocabulary_help)
+                .setView(container)
+                .setPositiveButton(android.R.string.ok, (d, w) -> CustomVocabulary.setVocabulary(this, input.getText().toString()))
+                .setNeutralButton(R.string.custom_vocabulary_reset, (d, w) -> CustomVocabulary.setVocabulary(this, CustomVocabulary.DEFAULT_VOCABULARY))
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        modeOverlay.setChecked(isOverlayServiceEnabled());
+    }
+
+    private boolean isOverlayServiceEnabled() {
+        String enabled = Settings.Secure.getString(getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+        if (enabled == null) return false;
+        String myService = getPackageName() + "/" + WhisperOverlayService.class.getName();
+        for (String service : enabled.split(":")) {
+            if (service.equalsIgnoreCase(myService)) return true;
+        }
+        return false;
     }
 
     private void checkInputMethodEnabled() {
@@ -489,14 +539,14 @@ public class MainActivity extends AppCompatActivity {
 
     // Transcription calls
     private void startProcessing(Whisper.Action action) {
-        if (countDownTimer!=null) { countDownTimer.cancel();}
+        if (countDownTimer!=null) countDownTimer.cancel();
         runOnUiThread(() -> {
             processingBar.setProgress(0);
             processingBar.setIndeterminate(true);
         });
         mWhisper.setAction(action);
         mWhisper.setLanguage(langToken);
-        mWhisper.start();
+        mWhisper.start(mRecorder.getRecordedAudio());
     }
 
     private void stopProcessing() {

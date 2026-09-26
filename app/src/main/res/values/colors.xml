@@ -6,4 +6,11 @@
     <color name="colorAccent">#996750A4</color>
     <color name="colorAccentDark">#ff6750A4</color>
     <color name="windowBackground">#FAFAFA</color>
+    <!-- Floating overlay (same in light and dark mode) -->
+    <color name="overlayBackground">#FF1C1B1F</color>
+    <color name="overlayCream">#FFFFFBE6</color>
+    <color name="overlayCreamDim">#99FFFBE6</color>
+    <color name="overlayLilac">#FFEBDDFF</color>
+    <color name="overlayOnButton">#FF1D1B20</color>
+    <color name="overlayRecording">#FFFF6B6B</color>
 </resources>

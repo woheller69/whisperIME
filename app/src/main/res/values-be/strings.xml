@@ -26,7 +26,7 @@
     <string name="multi_lingual_fast">Шматмоўны, хуткі</string>
     <string name="mode_transcription">транскрыпцыя</string>
     <string name="mode_translation">пераклад</string>
-    <string name="instructions">Націсніце і ўтрымлівайце кнопку мікрафона пакуль кажаце.</string>
+    <string name="instructions">Націсніце кнопку мікрафона, каб пачаць і спыніць запіс, або націсніце і ўтрымлівайце яе, пакуль кажаце.</string>
     <string name="update">АБНАВІЦЬ</string>
     <string name="simple_chinese">Кітайскі (спрошчаны):</string>
     <string name="text_to_speech">Тэкст-у-гаворку:</string>

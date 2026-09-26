@@ -29,7 +29,7 @@
     <string name="multi_lingual_fast">Multi-lingual, fast</string>
     <string name="mode_transcription">transcription</string>
     <string name="mode_translation">translation</string>
-    <string name="instructions">Press and hold the microphone button while speaking.</string>
+    <string name="instructions">Tap the microphone button to start and stop recording, or press and hold it while speaking.</string>
     <string name="update">UPDATE</string>
     <string name="simple_chinese">Simplified Chinese:</string>
     <string name="text_to_speech">Text-to-speech:</string>
@@ -38,4 +38,28 @@
     <string name="auto_button">automatic mode</string>
     <string name="error_no_input">No voice input received</string>
     <string name="auto_lang">Detect language</string>
+    <string name="overlay_service_label">Whisper floating mic</string>
+    <string name="overlay_accessibility_description">Shows a floating microphone button whenever you type. Tap it to dictate with Whisper and insert the text into the focused field without switching keyboard. Audio is processed on the device only. The accessibility permission is used solely to find the focused text field and insert the transcription.</string>
+    <string name="overlay_bubble_description">Start Whisper dictation</string>
+    <string name="overlay_cancel">Cancel</string>
+    <string name="overlay_insert">Insert text</string>
+    <string name="overlay_listening">Listening… %1$s</string>
+    <string name="overlay_transcribing">Transcribing…</string>
+    <string name="overlay_loading_model">Loading model…</string>
+    <string name="overlay_ready">Tap the wave to keep talking</string>
+    <string name="overlay_hint_speak">Speak now…</string>
+    <string name="overlay_no_model">Download a Whisper model first</string>
+    <string name="overlay_copied">No text field found – copied to clipboard</string>
+    <string name="overlay_enable">Floating mic button:</string>
+    <string name="custom_vocabulary_button">Custom words…</string>
+    <string name="custom_vocabulary_title">Custom words</string>
+    <string name="custom_vocabulary_help">One entry per line.\n• A word or name with at least 5 letters, or an acronym (e.g. Elena, GPT): words that sound alike are corrected to it (Helena → Elena, GPD → GPT). Shorter words only fix upper/lower case.\n• wrong = right (e.g. cloud code = Claude Code): explicit replacement.</string>
+    <string name="custom_vocabulary_reset">Reset</string>
+    <string name="overlay_transcribing_progress">Transcribing… %1$d/%2$d</string>
+    <string name="overlay_cancel_recording">Cancel recording</string>
+    <string name="overlay_cancel_transcription">Cancel transcription</string>
+    <string name="overlay_close">Close and discard</string>
+    <string name="overlay_move">Drag to move</string>
+    <string name="overlay_recording_discarded">Recording discarded</string>
+    <string name="overlay_transcription_cancelled">Transcription cancelled</string>
 </resources>

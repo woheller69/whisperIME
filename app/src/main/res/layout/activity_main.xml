@@ -117,6 +117,39 @@
         </LinearLayout>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:textColor="@color/colorAccent"
+                android:text="@string/overlay_enable" />
+
+            <CheckBox
+                android:id="@+id/mode_overlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:contentDescription="@string/overlay_enable"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btnCustomVocabulary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:textSize="16sp"
+            android:textColor="@color/colorAccent"
+            android:background="?attr/selectableItemBackground"
+            android:text="@string/custom_vocabulary_button" />
+
+        <LinearLayout
             android:id="@+id/layout_tts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -9,7 +9,7 @@
     <string name="select_model">Modelo:</string>
     <string name="status">Estado:</string>
     <string name="need_record_audio_permission">A permissão RECORD_AUDIO (gravar áudio) não foi concedida</string>
-    <string name="instructions">Pressione e segure o botão de microfone enquanto fala.</string>
+    <string name="instructions">Toque no botão do microfone para iniciar e parar a gravação, ou mantenha-o pressionado enquanto fala.</string>
     <string name="copy_to_clipboard">Copiar</string>
     <string name="info">Informação</string>
     <string name="processing">Processando…</string>

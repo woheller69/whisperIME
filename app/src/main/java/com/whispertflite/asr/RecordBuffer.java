@@ -3,46 +3,24 @@ package com.whispertflite.asr;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+/**
+ * Conversion of recorded audio for the Whisper engine.
+ * (Used to hold the last recording in a static field; the audio is now passed per instance,
+ * so the floating mic, keyboard and app can no longer overwrite each other's recording.)
+ */
 public class RecordBuffer {
-    // Static variable to store the byte array
-    private static byte[] outputBuffer;
 
-    // Synchronized method to set the byte array
-    public static synchronized void setOutputBuffer(byte[] buffer) {
-        outputBuffer = buffer;
-    }
-
-    // Synchronized method to get the byte array
-    public static synchronized byte[] getOutputBuffer() {
-        return outputBuffer;
-    }
-
-    public static float[] getSamples() {
-
-        int numSamples = RecordBuffer.getOutputBuffer().length / 2;
-        ByteBuffer byteBuffer = ByteBuffer.wrap(RecordBuffer.getOutputBuffer());
+    // 16 bit PCM (native byte order, as written by AudioRecord) to floats in [-1, 1).
+    // Not normalized: the engine normalizes each 30 s chunk separately.
+    public static float[] getSamples(byte[] pcm) {
+        int numSamples = pcm.length / 2;
+        ByteBuffer byteBuffer = ByteBuffer.wrap(pcm);
         byteBuffer.order(ByteOrder.nativeOrder());
 
-        // Convert audio data to PCM_FLOAT format
         float[] samples = new float[numSamples];
-        float maxAbsValue = 0.0f;
-
         for (int i = 0; i < numSamples; i++) {
-            samples[i] = (float) (byteBuffer.getShort() / 32768.0);
-            // Track the maximum absolute value
-            if (Math.abs(samples[i]) > maxAbsValue) {
-                maxAbsValue = Math.abs(samples[i]);
-            }
+            samples[i] = byteBuffer.getShort() / 32768.0f;
         }
-
-        // Normalize the samples
-        if (maxAbsValue > 0.0f) {
-            for (int i = 0; i < numSamples; i++) {
-                samples[i] /= maxAbsValue;
-            }
-        }
-
         return samples;
-
     }
 }

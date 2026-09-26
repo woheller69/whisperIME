@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="instructions">Apasă și menține apăsat butonul microfonului în timp ce vorbești.</string>
+    <string name="instructions">Atinge butonul microfonului pentru a porni și opri înregistrarea, sau ține-l apăsat în timp ce vorbești.</string>
     <string name="simple_chinese">Chineză simplificată:</string>
     <string name="need_record_audio_permission">Permisiunea RECORD_AUDIO nu este acordată</string>
     <string name="error_download">Eroare la descărcare</string>

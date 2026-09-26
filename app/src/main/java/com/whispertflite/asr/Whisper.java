@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.whispertflite.engine.WhisperEngine;
 import com.whispertflite.engine.WhisperEngineJava;
+import com.whispertflite.utils.CustomVocabulary;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,9 @@ public class Whisper {
     public interface WhisperListener {
         void onUpdateReceived(String message);
         void onResultReceived(WhisperResult result);
+
+        // Recordings longer than 30 s are transcribed in chunks: chunk of total are done
+        default void onProgress(int chunk, int total) {}
     }
 
     private static final String TAG = "Whisper";
@@ -33,8 +37,11 @@ public class Whisper {
     }
 
     private final AtomicBoolean mInProgress = new AtomicBoolean(false);
+    private volatile boolean mCancelled = false;
+    private volatile byte[] mAudio;
 
     private final WhisperEngine mWhisperEngine;
+    private final Context mContext;
     private Action mAction;
     private int mLangToken = -1;
     private WhisperListener mUpdateListener;
@@ -44,6 +51,7 @@ public class Whisper {
     private volatile boolean taskAvailable = false;
 
     public Whisper(Context context) {
+        this.mContext = context.getApplicationContext() != null ? context.getApplicationContext() : context;
         this.mWhisperEngine = new WhisperEngineJava(context);
 
         // Start thread for RecordBuffer transcription
@@ -74,8 +82,15 @@ public class Whisper {
         return currentModelPath;
     }
 
+    /**
+     * Unloads the model. A running transcription is cancelled first and this waits for it to end,
+     * so the interpreter is never closed while it is in use.
+     */
     public void unloadModel() {
-        mWhisperEngine.deinitialize();
+        stop();
+        synchronized (mWhisperEngine) {  // same lock as processRecordBuffer()
+            mWhisperEngine.deinitialize();
+        }
         currentModelPath = "";
     }
 
@@ -87,11 +102,14 @@ public class Whisper {
         this.mLangToken = language;
     }
 
-    public void start() {
+    /** Transcribes the given 16 bit PCM (16 kHz mono) recording, see {@link Recorder#getRecordedAudio()}. */
+    public void start(byte[] audio) {
         if (!mInProgress.compareAndSet(false, true)) {
             Log.d(TAG, "Execution is already in progress...");
             return;
         }
+        mAudio = audio;
+        mCancelled = false;
         taskLock.lock();
         try {
             taskAvailable = true;
@@ -101,8 +119,13 @@ public class Whisper {
         }
     }
 
+    /**
+     * Cancels the running transcription: the interpreter is aborted and no result is sent.
+     * isInProgress() stays true until the worker thread has actually finished.
+     */
     public void stop() {
-        mInProgress.set(false);
+        mCancelled = true;
+        mWhisperEngine.cancelInference();
     }
 
     public boolean isInProgress() {
@@ -128,14 +151,26 @@ public class Whisper {
 
     private void processRecordBuffer() {
         try {
-            if (mWhisperEngine.isInitialized() && RecordBuffer.getOutputBuffer() != null) {
+            byte[] audio = mAudio;
+            mAudio = null;
+            if (mWhisperEngine.isInitialized() && audio != null) {
                 long startTime = System.currentTimeMillis();
                 sendUpdate(MSG_PROCESSING);
 
-                WhisperResult whisperResult = null;
+                WhisperResult whisperResult;
                 synchronized (mWhisperEngine) {
-                    whisperResult = mWhisperEngine.processRecordBuffer(mAction, mLangToken);
+                    whisperResult = mWhisperEngine.processRecordBuffer(RecordBuffer.getSamples(audio), mAction, mLangToken,
+                            () -> mCancelled, (chunk, total) -> {
+                                if (mUpdateListener != null) mUpdateListener.onProgress(chunk, total);
+                            });
                 }
+                if (whisperResult == null || mCancelled) {
+                    Log.d(TAG, "Transcription cancelled");
+                    return;
+                }
+                // Fix names and terms from the user's custom vocabulary
+                whisperResult = new WhisperResult(CustomVocabulary.apply(mContext, whisperResult.getResult()),
+                        whisperResult.getLanguage(), whisperResult.getTask());
                 sendResult(whisperResult);
 
                 long timeTaken = System.currentTimeMillis() - startTime;

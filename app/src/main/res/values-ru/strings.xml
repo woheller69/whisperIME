@@ -36,6 +36,6 @@
     <string name="text_to_speech">Синтез речи:</string>
     <string name="tts_language_not_supported">TTS: Язык не поддерживается</string>
     <string name="voice_input">Источник голоса для Whisper</string>
-    <string name="instructions">Нажмите и удерживайте микрофон пока говорите.</string>
+    <string name="instructions">Нажмите кнопку микрофона, чтобы начать и остановить запись, или удерживайте её, пока говорите.</string>
     <string name="auto_lang">Определить язык</string>
 </resources>

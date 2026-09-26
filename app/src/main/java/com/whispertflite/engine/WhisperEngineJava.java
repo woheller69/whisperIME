@@ -3,7 +3,7 @@ package com.whispertflite.engine;
 import android.content.Context;
 import android.util.Log;
 
-import com.whispertflite.asr.RecordBuffer;
+import com.whispertflite.BuildConfig;
 import com.whispertflite.asr.Whisper;
 import com.whispertflite.asr.WhisperResult;
 import com.whispertflite.utils.InputLang;
@@ -26,9 +26,12 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BooleanSupplier;
 
 public class WhisperEngineJava implements WhisperEngine {
     private final String TAG = "WhisperEngineJava";
+    // The cut between two 30 s chunks is searched in the last CHUNK_CUT_SEARCH_SECONDS of a chunk
+    private static final int CHUNK_CUT_SEARCH_SECONDS = 8;
     private final WhisperUtil mWhisperUtil = new WhisperUtil();
 
     private final Context mContext;
@@ -47,7 +50,9 @@ public class WhisperEngineJava implements WhisperEngine {
     @Override
     public void initialize(String modelPath, String vocabPath, boolean multilingual) throws IOException {
         // Load model
+        long t0 = System.currentTimeMillis();
         loadModel(modelPath);
+        if (BuildConfig.DEBUG) Log.d(TAG, "Model load took " + (System.currentTimeMillis() - t0) + "ms");
         Log.d(TAG, "Model is loaded..." + modelPath);
 
         // Load filters and vocab
@@ -73,17 +78,82 @@ public class WhisperEngineJava implements WhisperEngine {
     }
 
     @Override
-    public WhisperResult processRecordBuffer(Whisper.Action mAction, int mLangToken) {
-        // Calculate Mel spectrogram
-        Log.d(TAG, "Calculating Mel spectrogram...");
-        float[] melSpectrogram = getMelSpectrogram();
-        Log.d(TAG, "Mel spectrogram is calculated...!");
+    public void cancelInference() {
+        Interpreter interpreter = mInterpreter;
+        if (interpreter != null) interpreter.setCancelled(true);
+    }
 
-        // Perform inference
-        WhisperResult whisperResult = runInference(melSpectrogram, mAction, mLangToken);
-        Log.d(TAG, "Inference is executed...!");
+    @Override
+    public WhisperResult processRecordBuffer(float[] samples, Whisper.Action mAction, int mLangToken,
+                                             BooleanSupplier isCancelled, ProgressListener progressListener) {
+        // Whisper only accepts 30s windows: split longer recordings into chunks, cut at quiet points
+        int chunkSize = WhisperUtil.WHISPER_SAMPLE_RATE * WhisperUtil.WHISPER_CHUNK_SIZE;
+        StringBuilder text = new StringBuilder();
+        String language = "";
+        Whisper.Action task = null;
+        int langToken = mLangToken;
+        int chunk = 0;
+        int start = 0;
+        do {
+            if (isCancelled.getAsBoolean()) return null;
+            if (progressListener != null) {
+                int remaining = (samples.length - start + chunkSize - 1) / chunkSize;
+                progressListener.onProgress(chunk, chunk + Math.max(1, remaining));
+            }
+            int end = findChunkEnd(samples, start, chunkSize);
+            if (BuildConfig.DEBUG) Log.d(TAG, "Processing chunk " + start + " - " + end + " of " + samples.length);
 
-        return whisperResult;
+            // Calculate Mel spectrogram
+            long t0 = System.currentTimeMillis();
+            float[] melSpectrogram = getMelSpectrogram(samples, start, end - start);
+            long t1 = System.currentTimeMillis();
+            if (BuildConfig.DEBUG) Log.d(TAG, "Mel spectrogram is calculated...! " + (t1 - t0) + "ms");
+
+            // Perform inference
+            Interpreter interpreter = mInterpreter;
+            if (interpreter == null) return null;  // model unloaded meanwhile
+            interpreter.setCancelled(false);
+            if (isCancelled.getAsBoolean()) return null;  // cancelled while the flag above was being reset
+            WhisperResult chunkResult = runInference(melSpectrogram, mAction, langToken);
+            if (BuildConfig.DEBUG) Log.d(TAG, "Inference is executed...! " + (System.currentTimeMillis() - t1) + "ms");
+            if (isCancelled.getAsBoolean()) return null;
+
+            if (start == 0 && end == samples.length) return chunkResult;  // single chunk: unchanged behaviour
+
+            String chunkText = chunkResult.getResult().trim();
+            if (!chunkText.isEmpty()) text.append(' ').append(chunkText);  // leading space like Whisper's own output
+            if (language.isEmpty()) {
+                language = chunkResult.getLanguage();
+                // Auto-detect only once: a quiet later chunk could otherwise be detected as another language
+                if (langToken == -1 && mAction == Whisper.Action.TRANSCRIBE && !language.isEmpty()) {
+                    langToken = InputLang.getIdForLanguage(InputLang.getLangList(), language);
+                }
+            }
+            if (task == null) task = chunkResult.getTask();
+            chunk++;
+            start = end;
+        } while (start < samples.length);
+
+        return new WhisperResult(text.toString(), language, task);
+    }
+
+    // Returns the end index of the chunk starting at start. If the rest exceeds chunkSize,
+    // the chunk is cut at the quietest 100ms frame within its last CHUNK_CUT_SEARCH_SECONDS to avoid splitting words.
+    private static int findChunkEnd(float[] samples, int start, int chunkSize) {
+        if (samples.length - start <= chunkSize) return samples.length;
+        int frame = WhisperUtil.WHISPER_SAMPLE_RATE / 10;
+        int searchFrom = start + chunkSize - CHUNK_CUT_SEARCH_SECONDS * WhisperUtil.WHISPER_SAMPLE_RATE;
+        int bestEnd = start + chunkSize;
+        double bestEnergy = Double.MAX_VALUE;
+        for (int f = searchFrom; f + frame <= start + chunkSize; f += frame / 2) {
+            double energy = 0;
+            for (int i = f; i < f + frame; i++) energy += samples[i] * samples[i];
+            if (energy <= bestEnergy) {  // <= prefers later frames on ties
+                bestEnergy = energy;
+                bestEnd = f + frame / 2;
+            }
+        }
+        return bestEnd;
     }
 
 
@@ -104,14 +174,16 @@ public class WhisperEngineJava implements WhisperEngine {
         mInterpreter = new Interpreter(tfliteModel, options);
     }
 
-    private float[] getMelSpectrogram() {
-        // Get samples in PCM_FLOAT format
-        float[] samples = RecordBuffer.getSamples();
-
+    private float[] getMelSpectrogram(float[] samples, int offset, int length) {
         int fixedInputSize = WhisperUtil.WHISPER_SAMPLE_RATE * WhisperUtil.WHISPER_CHUNK_SIZE;
         float[] inputSamples = new float[fixedInputSize];
-        int copyLength = Math.min(samples.length, fixedInputSize);
-        System.arraycopy(samples, 0, inputSamples, 0, copyLength);
+        int copyLength = Math.min(length, fixedInputSize);
+
+        // Normalize each chunk on its own, so a single loud peak does not attenuate the whole recording
+        float maxAbsValue = 0f;
+        for (int i = offset; i < offset + copyLength; i++) maxAbsValue = Math.max(maxAbsValue, Math.abs(samples[i]));
+        float gain = maxAbsValue > 0f ? 1f / maxAbsValue : 1f;
+        for (int i = 0; i < copyLength; i++) inputSamples[i] = samples[offset + i] * gain;
 
         int cores = Runtime.getRuntime().availableProcessors();
         return mWhisperUtil.getMelSpectrogram(inputSamples, inputSamples.length, copyLength, cores);

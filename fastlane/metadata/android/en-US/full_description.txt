@@ -10,10 +10,16 @@ Voice recognition works completely offline.
 
 As standalone app Whisper can also translate any supported language to English.
 
+Floating microphone (optional): a button appears next to any text field. Tap it to dictate and
+insert the text without switching keyboards. It uses an accessibility service only to find the
+focused text field and to insert the text. Nothing is read or stored, audio never leaves the device.
+
+Custom words: add names and terms that Whisper gets wrong (e.g. "cloud code = Claude Code").
+
 To get the most out of Whisper:
 <ul>
-<li>Press and hold the button while speaking</li>
+<li>Tap the button to start and stop recording, or press and hold it while speaking</li>
 <li>Pause briefly before starting to speak</li>
 <li>Speak clearly, loudly, and at a moderate pace</li>
-<li>Please note that there is a limit of 30s for each recording</li>
+<li>Recordings can be up to 5 minutes long</li>
 </ul>

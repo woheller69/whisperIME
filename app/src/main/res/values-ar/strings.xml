@@ -27,7 +27,7 @@
     <string name="processing">جاري المعالجة…</string>
     <string name="start">ابدأ</string>
     <string name="dialog_StarOnGitHub">هل أعجبك هذا التطبيق؟ الرجاء منح نجمة على GitHub أو شراء قهوة للمطور عبر PayPal.</string>
-    <string name="instructions">اضغط مع الاستمرار على زر الميكروفون أثناء التحدث.</string>
+    <string name="instructions">انقر على زر الميكروفون لبدء التسجيل وإيقافه، أو اضغط عليه مع الاستمرار أثناء التحدث.</string>
     <string name="update">تحديث</string>
     <string name="simple_chinese">الصينية المبسطة:</string>
     <string name="voice_input">الإدخال الصوتي لويسبر</string>

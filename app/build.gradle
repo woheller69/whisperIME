@@ -26,6 +26,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -65,9 +69,12 @@ dependencies {
     //implementation 'com.google.ai.edge.litert:litert:1.2.0' works, but extremely slow 30s instead of 8s, supports 16kB
     //implementation 'com.google.ai.edge.litert:litert:1.2.0'
     //implementation 'com.google.ai.edge.litert:litert-support:1.2.0'
+    // LiteRT 1.4.2 would be 16 kB page-size aligned, but inference is ~5x slower (12.2s vs 2.2s, whisper-base, Galaxy S23)
     implementation 'org.tensorflow:tensorflow-lite:2.15.0'
     implementation 'org.tensorflow:tensorflow-lite-support:0.4.4'
     implementation 'com.github.gkonovalov.android-vad:webrtc:2.0.10'
     implementation 'com.github.houbb:opencc4j:1.8.1'
     implementation 'com.github.woheller69:FreeDroidWarn:+'
+
+    testImplementation 'junit:junit:4.13.2'
 }
