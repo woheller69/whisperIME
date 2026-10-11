@@ -35,4 +35,6 @@
     <string name="tts_language_not_supported">TTS: Limba nu este acceptată</string>
     <string name="tts_initialization_failed">TTS: Inițializarea eșuată</string>
     <string name="auto_lang">Detectează limba</string>
+    <string name="auto_button">automat</string>
+    <string name="error_no_input">Nu s-a primit nicio intrare vocală</string>
 </resources>

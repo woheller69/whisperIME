@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="voice_input">విస్పర్ వాయిస్ ఇన్పుట్</string>
+    <string name="need_record_audio_permission">RECORD_AUDIO అనుమతి మంజూరు చేయబడలేదు</string>
+    <string name="error_download">డౌన్లోడ్ లోపం</string>
+    <string name="append">జతచేయు:</string>
+    <string name="translate">ఇంగ్లీష్కు అనువదించండి:</string>
+    <string name="info">సమాచారం</string>
+    <string name="start">ప్రారంభం</string>
+    <string name="dialog_StarOnGitHub">మీరు ఈ యాప్ను ఇష్టపడుతున్నారా? దయచేసి GitHub లో ఒక నక్షత్రం ఇవ్వండి లేదా డెవలపర్కు పేపాల్ ద్వారా కాఫీని కొనుగోలు చేయండి.</string>
+    <string name="dialog_Later_button">బహుశా తరువాత</string>
+    <string name="please_wait">దయచేసి వేచి ఉండండి . . .</string>
+    <string name="exit_button">నిష్క్రమించు</string>
+    <string name="return_button">తిరిగి</string>
+    <string name="delete_button">తొలగించు</string>
+    <string name="language">భాష:</string>
+    <string name="multi_lingual_slow">బహుళ-భాషా, నెమ్మదిగా</string>
+    <string name="english_only_fast">ఇంగ్లీష్ మాత్రమే, వేగంగా</string>
+    <string name="multi_lingual_fast">బహుళ-భాషా, వేగంగా</string>
+    <string name="mode_translation">అనువాదం</string>
+    <string name="instructions">మాట్లాడేటప్పుడు మైక్రోఫోన్ బటన్ను నొక్కండి మరియు పట్టుకోండి.</string>
+    <string name="update">నవీకరణ</string>
+    <string name="simple_chinese">సరళీకృత చైనీస్:</string>
+    <string name="tts_language_not_supported">TTS: భాష మద్దతు లేదు</string>
+    <string name="tts_initialization_failed">TTS: ప్రారంభీకరణ విఫలమైంది</string>
+    <string name="auto_lang">భాషను గుర్తించండి</string>
+</resources>
