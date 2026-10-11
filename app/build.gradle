@@ -15,8 +15,8 @@ android {
         applicationId "org.woheller69.whisper"
         minSdk 28
         targetSdk 35
-        versionCode 37
-        versionName "3.7"
+        versionCode 38
+        versionName "3.8"
 
     }
 
@@ -65,9 +65,9 @@ dependencies {
     //implementation 'com.google.ai.edge.litert:litert:1.2.0' works, but extremely slow 30s instead of 8s, supports 16kB
     //implementation 'com.google.ai.edge.litert:litert:1.2.0'
     //implementation 'com.google.ai.edge.litert:litert-support:1.2.0'
-    implementation 'org.tensorflow:tensorflow-lite:2.15.0'
-    implementation 'org.tensorflow:tensorflow-lite-support:0.4.4'
+    implementation 'org.tensorflow:tensorflow-lite:2.17.0'
+    implementation 'org.tensorflow:tensorflow-lite-support:0.5.0'
     implementation 'com.github.gkonovalov.android-vad:webrtc:2.0.10'
-    implementation 'com.github.houbb:opencc4j:1.8.1'
+    implementation 'com.github.houbb:opencc4j:1.14.0'
     implementation 'com.github.woheller69:FreeDroidWarn:+'
 }
