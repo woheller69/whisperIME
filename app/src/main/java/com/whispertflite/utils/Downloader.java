@@ -392,6 +392,10 @@ public class Downloader {
     public static void copyAssetsToSdcard(Context context) {
         String[] extensions = {"bin"};
         File sdcardDataFolder = context.getExternalFilesDir(null);
+        if (sdcardDataFolder != null && !sdcardDataFolder.exists() && !sdcardDataFolder.mkdirs()) {
+            Log.d("WhisperASR", "Failed to make directory: " + sdcardDataFolder);
+            return;
+        }
         AssetManager assetManager = context.getAssets();
 
         try {
